@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.FormController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.FormController">
    <children>
       <Label text="Nuevo/editar proyecto">
          <font>
@@ -34,21 +34,19 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Código;" />
+            <Label text="Código:" />
             <Label text="Nombre:" GridPane.rowIndex="1" />
             <Label text="Fecha creación:" GridPane.rowIndex="2" />
             <Label text="Fecha ejecución:" GridPane.rowIndex="3" />
-            <Label text="Palabras clave:" GridPane.rowIndex="4" />
-            <Label text="Tipo proyecto:" GridPane.rowIndex="5" />
-            <Label text="Estado:" GridPane.rowIndex="6" />
-            <Label text="Calificación:" GridPane.rowIndex="7" />
-            <Label text="Jefe de proyecto:" GridPane.rowIndex="8" />
-            <Label text="Cooperación:" GridPane.rowIndex="9" />
-            <Label text="Bajada de calificación:" GridPane.rowIndex="10" />
-            <Label text="Fases:" GridPane.rowIndex="11" />
+            <Label text="Tipo proyecto:" GridPane.rowIndex="4" />
+            <Label text="Estado:" GridPane.rowIndex="5" />
+            <Label text="Calificación:" GridPane.rowIndex="6" />
+            <Label text="Jefe de proyecto:" GridPane.rowIndex="10" />
+            <Label text="Cooperación:" GridPane.rowIndex="8" />
+            <Label text="Bajada de calificación:" GridPane.rowIndex="7" />
+            <Label text="Fases:" GridPane.rowIndex="9" />
             <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="3" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="1" />
@@ -60,10 +58,9 @@
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="8" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="9" />
             <TextField GridPane.columnIndex="1" GridPane.rowIndex="10" />
-            <TextField GridPane.columnIndex="1" GridPane.rowIndex="11" />
          </children>
       </GridPane>
-      <HBox prefHeight="100.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefWidth="200.0">
          <children>
             <Button mnemonicParsing="false" onAction="#cancelar" text="Cancelar" />
             <Button mnemonicParsing="false" onAction="#guardar" text="Guardar" />
