@@ -22,18 +22,17 @@ public class ProyectosController implements Initializable {
 
 
     @FXML
-    TableView tableProyectos;
+    TableView<ProyectoOB> tableProyectos;
     @FXML
-    TableColumn code;
+    TableColumn<ProyectoOB, Integer> code;
     @FXML
-    TableColumn name;
+    TableColumn<ProyectoOB, String> name;
     @FXML
-    TableColumn type;
+    TableColumn<ProyectoOB, String> type;
     @FXML
-    TableColumn state;
+    TableColumn<ProyectoOB, String> state;
     @FXML
-    TableColumn boss;
-
+    TableColumn<ProyectoOB, Integer> boss;
     @FXML
     Button editar;
     @FXML
@@ -46,9 +45,12 @@ public class ProyectosController implements Initializable {
     public void tabla(){
         SQL.sacar_proyectos("SELECT * FROM PROYECTOS");
         final ObservableList<ProyectoOB> datos = FXCollections.observableArrayList(); //poder sacar los movimientos ordenados
-        tableProyectos.getColumns().clear();
+        if (SQL.lista != null) {
+            datos.setAll(SQL.lista);
+        }
+        //tableProyectos.getColumns().clear();
 
-        datos.setAll(SQL.lista);
+        /* LO COMENTO
 
         code = new TableColumn("Código");
         code.setMinWidth(100);
@@ -68,10 +70,18 @@ public class ProyectosController implements Initializable {
 
         boss = new TableColumn("Jefe de Proyecto");
         boss.setMinWidth(100);
-        boss.setCellValueFactory( new PropertyValueFactory<ProyectoOB, String>("jefe"));
+        boss.setCellValueFactory( new PropertyValueFactory<ProyectoOB, String>("jefeId"));
 
         tableProyectos.setItems(datos);
-        tableProyectos.getColumns().addAll(code,name,type,state,boss);
+        tableProyectos.getColumns().addAll(code,name,type,state,boss);*/
+
+        code.setCellValueFactory(new PropertyValueFactory<ProyectoOB, Integer>("codigo"));
+        name.setCellValueFactory(new PropertyValueFactory<ProyectoOB, String>("nombre"));
+        type.setCellValueFactory(new PropertyValueFactory<ProyectoOB, String>("tipo"));
+        state.setCellValueFactory(new PropertyValueFactory<ProyectoOB, String>("estado"));
+        boss.setCellValueFactory(new PropertyValueFactory<ProyectoOB, Integer>("jefeId"));
+        tableProyectos.setItems(datos);
+
     }
 
     public void borrar(){
@@ -98,7 +108,7 @@ public class ProyectosController implements Initializable {
 
     public void abrirFormulario(ProyectoOB p){
         try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("formProyecto.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("form-proyecto.fxml"));
             Parent root = loader.load();
 
             FormController form = loader.getController();
