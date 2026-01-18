@@ -7,11 +7,13 @@
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.ProyectosController">
 
     <fx:include source="menu.fxml" />
+
    <Label text="Proyectos Documentales">
       <font>
          <Font size="25.0" />
       </font>
    </Label>
+
    <TableView fx:id="tableProyectos" onSort="#tabla" prefHeight="239.0" prefWidth="600.0">
      <columns>
        <TableColumn fx:id="code" prefWidth="91.66666412353516" text="Código" />
@@ -21,14 +23,13 @@
          <TableColumn fx:id="boss" prefWidth="150.66665649414062" text="Jefe de proyecto" />
      </columns>
    </TableView>
+
    <HBox prefHeight="100.0" prefWidth="200.0">
       <children>
-         <Button mnemonicParsing="false" text="Editar" />
+         <Button fx:id="editar" mnemonicParsing="false" onAction="#editar" text="Editar" />
          <Button fx:id="borrar" mnemonicParsing="false" onAction="#borrar" text="Borrar" />
-         <Button mnemonicParsing="false" text="Crear" />
+         <Button fx:id="crear" mnemonicParsing="false" onAction="#crear" text="Crear" />
       </children>
    </HBox>
-
-
 
 </VBox>
