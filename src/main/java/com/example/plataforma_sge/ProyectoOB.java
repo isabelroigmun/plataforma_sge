@@ -1,29 +1,30 @@
 package com.example.plataforma_sge;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Date;
 
 public class ProyectoOB {
 
     private int codigo;
     private String nombre;
-    private LocalDate fechaCreacion;
-    private LocalDate fechaEjecucion;
-    private String palabrasClave;
-    private String tipo;
-    private String estado;
-    private String calificacion;
-    private boolean bajadaCalificacion;
+    private LocalDateTime fechaCreacion;
+    private LocalDate fechaEjInicio;
+    private LocalDate fechaEjFinal;
+    private String tipo; //ENUM("IT","I+D","I+D+i","I+D+IT")
+    private String estado; //activo o inactivo
+    private String calificacion; //ENUM("IT","I+D","I+D+i","I+D+IT")
+    private boolean bajadaCalificacion; //falso por defecto
     private boolean enCooperacion;
     private int fases;
-    private int jefeId;
+    private int jefeId; //PROVISIONAL (?)
 
-    public ProyectoOB(int codigo, String nombre, LocalDate fechaCreacion, LocalDate fechaEjecucion, String palabrasClave, String tipo, String estado, String calificacion, boolean bajadaCalificacion, boolean enCooperacion, int fases, int jefeId) {
+    public ProyectoOB(int codigo, String nombre, LocalDateTime fechaCreacion, LocalDate fechaEjInicio, LocalDate fechaEjFinal, String tipo, String estado, String calificacion, boolean bajadaCalificacion, boolean enCooperacion, int fases, int jefeId) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
-        this.fechaEjecucion = fechaEjecucion;
-        this.palabrasClave = palabrasClave;
+        this.fechaEjInicio = fechaEjInicio;
+        this.fechaEjFinal = fechaEjFinal;
         this.tipo = tipo;
         this.estado = estado;
         this.calificacion = calificacion;
@@ -33,6 +34,7 @@ public class ProyectoOB {
         this.jefeId = jefeId;
     }
 
+    //GETTERS Y SETTERS
     public int getCodigo() {
         return codigo;
     }
@@ -49,28 +51,28 @@ public class ProyectoOB {
         this.nombre = nombre;
     }
 
-    public LocalDate getFechaCreacion() {
+    public LocalDateTime getFechaCreacion() {
         return fechaCreacion;
     }
 
-    public void setFechaCreacion(LocalDate fechaCreacion) {
+    public void setFechaCreacion(LocalDateTime fechaCreacion) {
         this.fechaCreacion = fechaCreacion;
     }
 
-    public LocalDate getFechaEjecucion() {
-        return fechaEjecucion;
+    public LocalDate getFechaEjInicio() {
+        return fechaEjInicio;
     }
 
-    public void setFechaEjecucion(LocalDate fechaEjecucion) {
-        this.fechaEjecucion = fechaEjecucion;
+    public void setFechaEjInicio(LocalDate fechaEjInicio) {
+        this.fechaEjInicio = fechaEjInicio;
     }
 
-    public String getPalabrasClave() {
-        return palabrasClave;
+    public LocalDate getFechaEjFinal() {
+        return fechaEjFinal;
     }
 
-    public void setPalabrasClave(String palabrasClave) {
-        this.palabrasClave = palabrasClave;
+    public void setFechaEjFinal(LocalDate fechaEjFinal) {
+        this.fechaEjFinal = fechaEjFinal;
     }
 
     public String getTipo() {
