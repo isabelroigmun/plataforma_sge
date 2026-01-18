@@ -1,6 +1,5 @@
 package com.example.plataforma_sge;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -13,7 +12,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class proyectosController implements Initializable {
+public class ProyectosController implements Initializable {
 
 
     @FXML
