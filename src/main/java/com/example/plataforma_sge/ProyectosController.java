@@ -3,12 +3,18 @@ package com.example.plataforma_sge;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Modality;
+import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -29,7 +35,11 @@ public class ProyectosController implements Initializable {
     TableColumn boss;
 
     @FXML
+    Button editar;
+    @FXML
     Button borrar;
+    @FXML
+    Button crear;
 
 
 
@@ -37,7 +47,6 @@ public class ProyectosController implements Initializable {
         SQL.sacar_proyectos("SELECT * FROM PROYECTOS");
         final ObservableList<ProyectoOB> datos = FXCollections.observableArrayList(); //poder sacar los movimientos ordenados
         tableProyectos.getColumns().clear();
-
 
         datos.setAll(SQL.lista);
 
@@ -73,6 +82,42 @@ public class ProyectosController implements Initializable {
         tabla();
     }
 
+    public void crear(){
+        abrirFormulario(null);
+        tabla();
+    }
+
+    public void editar(){
+        ProyectoOB seleccionado = (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
+        if (seleccionado==null){
+            return;
+        }
+        abrirFormulario(seleccionado);
+        tabla();
+    }
+
+    public void abrirFormulario(ProyectoOB p){
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("formProyecto.fxml"));
+            Parent root = loader.load();
+
+            FormController form = loader.getController();
+            form.setProyecto(p);
+
+            Stage stage = new Stage();
+            if (p == null) {
+                stage.setTitle("Nuevo Proyecto");
+            } else {
+                stage.setTitle("Editar Proyecto");
+            }
+            stage.setScene(new Scene(root));
+            stage.initModality(Modality.APPLICATION_MODAL);
+            stage.showAndWait();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
