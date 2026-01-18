@@ -7,6 +7,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class FormController {
     @FXML
@@ -35,6 +36,7 @@ public class FormController {
     ProyectoOB proyecto;
 
     public void setProyecto(ProyectoOB proyecto) {
+        this.proyecto=proyecto;
         if (proyecto != null) {
             tfCodigo.setText(String.valueOf(proyecto.getCodigo()));
             tfCodigo.setDisable(true);
@@ -77,15 +79,71 @@ public class FormController {
     @FXML
     public void guardar() {
         try {
-            //aquí guardará los datos en variables
-            //también tiene que hacer comprobación de no ser nulo algún dato
+            //tiene que hacer comprobación de no ser nulo algún dato
+            //voy a comprobar solo si el nombre es vacío pero para tener la estructura y luego poder añadir más con un or
+            if (tfNombre.getText().isEmpty()) {
+                Alert alert = new Alert(Alert.AlertType.WARNING, "Rellena los campos");
+                alert.showAndWait();
+                return;
+            }
+
+            //aquí guardará los datos en variables para luego insertarlos/actualizarlos en el SQL
+            String nombre = tfNombre.getText();
+            LocalDateTime fechaCreacion = LocalDateTime.now();
+            LocalDate fechaEjInicio = dpEjecucion.getValue();
+            LocalDate fechaEjFinal = null;
+            String tipo = tfTipoProyecto.getText();
+            int activo;
+            if (tfEstado.getText().equalsIgnoreCase("activo")) {
+                activo = 1;
+            } else {
+                activo = 0;
+            }
+            String calificacion = tfCalificacion.getText();
+            boolean bajadaCalificacion = Boolean.parseBoolean(tfBajadaCalificacion.getText());
+            boolean enCooperacion = Boolean.parseBoolean(tfCooperacion.getText());
+            int fases = Integer.parseInt(tfFases.getText());
+            int jefeId = Integer.parseInt(tfJefe.getText());
 
             if (proyecto == null) {
                 //INSERT en el SQL
+                String sql = "INSERT INTO proyectos " +
+                        "(nombre, fecha_creacion, fecha_ej_inicio, fecha_ej_final, tipo_proyecto, activo, calificacion, bajada_calificacion, en_cooperacion, fases, usuarios_id) VALUES (" +
+                        "'" + nombre + "', " +
+                        "'" + fechaCreacion + "', " +
+                        "'" + fechaEjInicio + "', " +
+                        "NULL, "+
+                        "'" + tipo + "', " +
+                        activo + ", " +
+                        "'" + calificacion + "', " +
+                        bajadaCalificacion + ", " +
+                        enCooperacion + ", " +
+                        fases + ", " +
+                        jefeId + ")";
+
+                SQL.vacio(sql);
             } else {
                 //UPDATE en el SQL
+                int codigo = proyecto.getCodigo();
+
+                String sql = "UPDATE proyectos SET " +
+                        "nombre='" + nombre + "', " +
+                        "fecha_ej_inicio='" + fechaEjInicio + "', " +
+                        "fecha_ej_final=" + fechaEjFinal + ", " +
+                        "tipo_proyecto='" + tipo + "', " +
+                        "activo=" + activo + ", " +
+                        "calificacion='" + calificacion + "', " +
+                        "bajada_calificacion=" + bajadaCalificacion + ", " +
+                        "en_cooperacion=" + enCooperacion + ", " +
+                        "fases=" + fases + ", " +
+                        "usuarios_id=" + jefeId + " " +
+                        "WHERE id=" + codigo;
+
+                SQL.vacio(sql);
             }
             //cerrar ventana
+            Stage stage = (Stage) tfNombre.getScene().getWindow();
+            stage.close();
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error al guardar proyecto: " + e.getMessage());
