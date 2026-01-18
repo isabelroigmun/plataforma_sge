@@ -11,7 +11,7 @@
 
     <Label text="Inicio de sesión" />
     <TextField fx:id="user" promptText="Usuario" />
-    <TextField fx:id="password" promptText="Contraseña" />
+    <PasswordField fx:id="password" promptText="Contraseña"/>
     <Label fx:id="estado" text="Estado" />
     <Button onAction="#signin" text="Iniciar Sesión" />
 </VBox>

@@ -26,8 +26,8 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="96339f1f-0a54-44e3-805c-027ca75a1bd5">
-      <console name="Connection" type="STANDARD" schema="mysql" session="Main" />
+    <connection id="e325977a-e0c8-4f74-9710-b31876f70af9">
+      <console name="Connection" type="STANDARD" schema="trabajo_sge" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -52,7 +52,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection source-id="" id="96339f1f-0a54-44e3-805c-027ca75a1bd5" active="true" signed="true">
+      <connection source-id="" id="e325977a-e0c8-4f74-9710-b31876f70af9" active="true" signed="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -65,7 +65,7 @@
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="3306" />
-          <database value="mysql" />
+          <database value="trabajo_sge" />
           <tns-folder value="" />
           <tns-profile value="" />
           <server-type value="" />
