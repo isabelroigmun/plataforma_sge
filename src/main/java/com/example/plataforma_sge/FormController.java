@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class FormController {
     @FXML
@@ -87,6 +88,46 @@ public class FormController {
                 return;
             }
 
+            if (dpEjecucion.getValue()==null){
+                mostrarAlerta("Selecciona una fecha de ejecución");
+                return;
+            }
+
+            if (tfFases.getText().isEmpty() || tfJefe.getText().isEmpty()) {
+                mostrarAlerta("Fases y Jefe debe ser un número entero");
+                return;
+            }
+
+            if (!tfBajadaCalificacion.getText().toLowerCase().trim().equals("true")||!tfBajadaCalificacion.getText().toLowerCase().trim().equals("false")){
+                mostrarAlerta("Bajada de calificación debe ser true o false");
+                return;
+            }
+
+            ArrayList<String> tipos = new ArrayList<>();
+            tipos.add("IT");
+            tipos.add("I+D");
+            tipos.add("I+D+i");
+            tipos.add("I+D+IT");
+            if (!tipos.contains(tfTipoProyecto.getText())){
+                mostrarAlerta("Tipo no válido");
+                return;
+            }
+
+            if (!tipos.contains(tfCalificacion.getText())){
+                mostrarAlerta("Calificación no válida");
+                return;
+            }
+
+            if (!tfEstado.getText().equals("activo") && !tfEstado.getText().equals("inactivo")){
+                mostrarAlerta("Estado debe ser activo o inactivo");
+                return;
+            }
+
+            if (dpEjecucion.getValue().isBefore(dpCreacion.getValue())){
+                mostrarAlerta("La fecha de ejecución debe ser posterior a la fecha de creación");
+                return;
+            }
+
             //aquí guardará los datos en variables para luego insertarlos/actualizarlos en el SQL
             String nombre = tfNombre.getText();
             LocalDateTime fechaCreacion = LocalDateTime.now();
@@ -144,6 +185,10 @@ public class FormController {
             //cerrar ventana
             Stage stage = (Stage) tfNombre.getScene().getWindow();
             stage.close();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            Alert alert = new Alert(Alert.AlertType.ERROR, "Has introducido un tipo de dato incorrecto: " + e.getMessage());
+            alert.showAndWait();
         } catch (Exception e) {
             e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error al guardar proyecto: " + e.getMessage());
@@ -155,5 +200,10 @@ public class FormController {
     public void cancelar() {
         Stage stage = (Stage) tfNombre.getScene().getWindow();
         stage.close();
+    }
+
+    private void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING, mensaje);
+        alert.showAndWait();
     }
 }
