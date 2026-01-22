@@ -98,7 +98,7 @@ public class FormController {
                 return;
             }
 
-            if (!tfBajadaCalificacion.getText().toLowerCase().trim().equals("true")||!tfBajadaCalificacion.getText().toLowerCase().trim().equals("false")){
+            if (!tfBajadaCalificacion.getText().toLowerCase().trim().equals("true")&&!tfBajadaCalificacion.getText().toLowerCase().trim().equals("false")){
                 mostrarAlerta("Bajada de calificación debe ser true o false");
                 return;
             }
