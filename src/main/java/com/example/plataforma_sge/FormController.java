@@ -33,7 +33,7 @@ public class FormController {
     @FXML
     TextField tfFases;
     @FXML
-    TextField tfJefe; //a desarrollar más adelante, un choice/combo entre la lista de usuarios que hay
+    ComboBox<UsuarioOB> cbJefe; //un choice/combo entre la lista de usuarios que hay
 
     ProyectoOB proyecto;
 
@@ -46,11 +46,11 @@ public class FormController {
         }
         cbTipoProyecto.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
         cbCalificacion.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
-
         cbEstado.getItems().addAll("activo", "inactivo");
-
         cbBajadaCalificacion.getItems().addAll(true, false);
         cbCooperacion.getItems().addAll(true, false);
+
+        cargarUsuarios();
     }
 
     public void setProyecto(ProyectoOB proyecto) {
@@ -68,7 +68,12 @@ public class FormController {
             cbBajadaCalificacion.setValue(proyecto.isBajadaCalificacion());
             cbCooperacion.setValue(proyecto.isEnCooperacion());
             tfFases.setText(String.valueOf(proyecto.getFases()));
-            tfJefe.setText(String.valueOf(proyecto.getJefeId()));
+            for (UsuarioOB u : cbJefe.getItems()) {
+                if (u.getId() == proyecto.getJefeId()) {
+                    cbJefe.setValue(u);
+                    break;
+                }
+            }
         } else {
             tfCodigo.setText("");
             tfCodigo.setDisable(true);
@@ -82,7 +87,7 @@ public class FormController {
             cbBajadaCalificacion.setValue(false);
             cbCooperacion.setValue(false);
             tfFases.setText("");
-            tfJefe.setText("");
+            //cbJefe.setValue("");
         }
     }
 
@@ -101,8 +106,14 @@ public class FormController {
                 return;
             }
 
-            if (tfFases.getText().isEmpty() || tfJefe.getText().isEmpty()) {
-                mostrarAlerta("Fases y Jefe debe ser un número entero");
+            if (tfFases.getText().isEmpty()) {
+                mostrarAlerta("Fases debe ser un número entero");
+                return;
+            }
+
+            UsuarioOB jefeSeleccionado = cbJefe.getValue();
+            if (jefeSeleccionado == null) {
+                mostrarAlerta("Selecciona un jefe de proyecto");
                 return;
             }
 
@@ -115,6 +126,7 @@ public class FormController {
                 mostrarAlerta("La fecha de ejecución debe ser posterior a la fecha de creación");
                 return;
             }
+
 
             //aquí guardará los datos en variables para luego insertarlos/actualizarlos en el SQL
             String nombre = tfNombre.getText();
@@ -133,7 +145,7 @@ public class FormController {
             boolean enCooperacion = cbCooperacion.getValue();
 
             int fases = Integer.parseInt(tfFases.getText());
-            int jefeId = Integer.parseInt(tfJefe.getText());
+            int jefeId = jefeSeleccionado.getId();
 
             if (proyecto == null) {
                 //INSERT en el SQL
@@ -191,8 +203,14 @@ public class FormController {
         stage.close();
     }
 
-    private void mostrarAlerta(String mensaje) {
+    public void mostrarAlerta(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING, mensaje);
         alert.showAndWait();
     }
+
+    public void cargarUsuarios() {
+        cbJefe.getItems().clear();
+        cbJefe.getItems().addAll(SQL.getUsuarios());
+    }
+
 }

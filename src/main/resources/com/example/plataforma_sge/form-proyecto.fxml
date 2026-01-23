@@ -59,7 +59,7 @@
              <ComboBox fx:id="cbBajadaCalificacion" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
              <ComboBox fx:id="cbCooperacion" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
              <TextField fx:id="tfFases" GridPane.columnIndex="1" GridPane.rowIndex="9" />
-             <TextField fx:id="tfJefe" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+             <ComboBox fx:id="cbJefe" GridPane.columnIndex="1" GridPane.rowIndex="10" />
          </children>
       </GridPane>
       <HBox alignment="CENTER" prefWidth="200.0">
