@@ -1,10 +1,7 @@
 package com.example.plataforma_sge;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -12,6 +9,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class FormController {
+    @FXML
+    Label txtPrincipal;
+
     @FXML
     TextField tfCodigo; //no se puede editar
     @FXML
@@ -39,6 +39,13 @@ public class FormController {
 
     @FXML
     public void initialize() {
+        //he añadido esto
+        if (proyecto==null){
+            txtPrincipal.setText("Crear proyecto");
+        } else {
+            txtPrincipal.setText("Editar proyecto");
+        }
+        //el resto lo he dejado como estaba
         cbTipoProyecto.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
         cbCalificacion.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
 
