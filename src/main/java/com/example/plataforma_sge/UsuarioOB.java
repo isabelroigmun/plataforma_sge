@@ -67,7 +67,7 @@ public class UsuarioOB {
 
     @Override
     public String toString() {
-        return getUsuario();
+        return getUsuario(); //esto sirve para que en el formulario de crear/editar proyecto se muestre el usuario en el combobox
     }
 
 }

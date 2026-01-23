@@ -39,11 +39,6 @@ public class FormController {
 
     @FXML
     public void initialize() {
-        if (proyecto==null){
-            txtPrincipal.setText("Crear proyecto");
-        } else {
-            txtPrincipal.setText("Editar proyecto");
-        }
         cbTipoProyecto.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
         cbCalificacion.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
         cbEstado.getItems().addAll("activo", "inactivo");
@@ -56,6 +51,8 @@ public class FormController {
     public void setProyecto(ProyectoOB proyecto) {
         this.proyecto=proyecto;
         if (proyecto != null) {
+            txtPrincipal.setText("Editar proyecto");
+
             tfCodigo.setText(String.valueOf(proyecto.getCodigo()));
             tfCodigo.setDisable(true);
             tfNombre.setText(proyecto.getNombre());
@@ -75,6 +72,8 @@ public class FormController {
                 }
             }
         } else {
+            txtPrincipal.setText("Crear proyecto");
+
             tfCodigo.setText("");
             tfCodigo.setDisable(true);
             tfNombre.setText("");
@@ -87,7 +86,7 @@ public class FormController {
             cbBajadaCalificacion.setValue(false);
             cbCooperacion.setValue(false);
             tfFases.setText("");
-            //cbJefe.setValue("");
+            cbJefe.setValue(null);
         }
     }
 

@@ -48,32 +48,6 @@ public class ProyectosController implements Initializable {
         if (SQL.lista != null) {
             datos.setAll(SQL.lista);
         }
-        //tableProyectos.getColumns().clear();
-
-        /* LO COMENTO
-
-        code = new TableColumn("Código");
-        code.setMinWidth(100);
-        code.setCellValueFactory( new PropertyValueFactory<ProyectoOB, String>("codigo"));
-
-        name = new TableColumn("Nombre");
-        name.setMinWidth(100);
-        name.setCellValueFactory( new PropertyValueFactory<ProyectoOB, String>("nombre"));
-
-        type = new TableColumn("Tipo");
-        type.setMinWidth(100);
-        type.setCellValueFactory( new PropertyValueFactory<ProyectoOB, String>("tipo"));
-
-        state = new TableColumn("Estado");
-        state.setMinWidth(100);
-        state.setCellValueFactory( new PropertyValueFactory<ProyectoOB, String>("estado"));
-
-        boss = new TableColumn("Jefe de Proyecto");
-        boss.setMinWidth(100);
-        boss.setCellValueFactory( new PropertyValueFactory<ProyectoOB, String>("jefeId"));
-
-        tableProyectos.setItems(datos);
-        tableProyectos.getColumns().addAll(code,name,type,state,boss);*/
 
         code.setCellValueFactory(new PropertyValueFactory<ProyectoOB, Integer>("codigo"));
         name.setCellValueFactory(new PropertyValueFactory<ProyectoOB, String>("nombre"));
