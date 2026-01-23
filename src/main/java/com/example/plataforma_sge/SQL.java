@@ -115,4 +115,37 @@ public class SQL {
             System.out.println("SQL Error: " + e.getMessage());
         }
     }
+
+    public static ArrayList<UsuarioOB> getUsuarios() {
+        ArrayList<UsuarioOB> listaUsuarios = new ArrayList<>();
+        String url = "jdbc:mysql://localhost:3306/trabajo_sge";
+        String user = "root";
+        String password = "root";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(url, user, password);
+            Statement st = conexion.createStatement();
+            ResultSet rs = st.executeQuery("SELECT id, nombre, apellidos, usuario, contraseña, rol_id FROM usuarios");
+
+            while (rs.next()) {
+                listaUsuarios.add(new UsuarioOB(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("apellidos"),
+                        rs.getString("usuario"),
+                        rs.getString("contraseña"),
+                        rs.getInt("rol_id")
+                ));
+            }
+
+            st.close();
+            conexion.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaUsuarios;
+    }
+
 }
