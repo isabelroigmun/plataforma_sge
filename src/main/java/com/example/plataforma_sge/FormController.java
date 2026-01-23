@@ -39,13 +39,11 @@ public class FormController {
 
     @FXML
     public void initialize() {
-        //he añadido esto
         if (proyecto==null){
             txtPrincipal.setText("Crear proyecto");
         } else {
             txtPrincipal.setText("Editar proyecto");
         }
-        //el resto lo he dejado como estaba
         cbTipoProyecto.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
         cbCalificacion.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
 
