@@ -11,6 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import javafx.scene.control.ComboBox?>
 <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.FormController">
    <children>
       <Label text="Nuevo/editar proyecto">
@@ -52,11 +53,11 @@
              <TextField fx:id="tfNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
              <DatePicker fx:id="dpCreacion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
              <DatePicker fx:id="dpEjecucion" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-             <TextField fx:id="tfTipoProyecto" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-             <TextField fx:id="tfEstado" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-             <TextField fx:id="tfCalificacion" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-             <TextField fx:id="tfBajadaCalificacion" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-             <TextField fx:id="tfCooperacion" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+             <ComboBox fx:id="cbTipoProyecto" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+             <ComboBox fx:id="cbEstado" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+             <ComboBox fx:id="cbCalificacion" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+             <ComboBox fx:id="cbBajadaCalificacion" GridPane.columnIndex="1" GridPane.rowIndex="7"/>
+             <ComboBox fx:id="cbCooperacion" GridPane.columnIndex="1" GridPane.rowIndex="8"/>
              <TextField fx:id="tfFases" GridPane.columnIndex="1" GridPane.rowIndex="9" />
              <TextField fx:id="tfJefe" GridPane.columnIndex="1" GridPane.rowIndex="10" />
          </children>

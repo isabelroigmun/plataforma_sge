@@ -2,6 +2,7 @@ package com.example.plataforma_sge;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
@@ -20,21 +21,32 @@ public class FormController {
     @FXML
     DatePicker dpEjecucion;
     @FXML
-    TextField tfTipoProyecto; //ENUM("IT","I+D","I+D+i","I+D+IT")
+    ComboBox<String> cbTipoProyecto; //ENUM("IT","I+D","I+D+i","I+D+IT")
     @FXML
-    TextField tfEstado; //activo o inactivo igual choice
+    ComboBox<String> cbEstado; //activo o inactivo
     @FXML
-    TextField tfCalificacion; //ENUM("IT","I+D","I+D+i","I+D+IT")
+    ComboBox<String> cbCalificacion; //ENUM("IT","I+D","I+D+i","I+D+IT")
     @FXML
-    TextField tfBajadaCalificacion;
+    ComboBox<Boolean> cbBajadaCalificacion; //true o false
     @FXML
-    TextField tfCooperacion;
+    ComboBox<Boolean> cbCooperacion; //true o false
     @FXML
     TextField tfFases;
     @FXML
-    TextField tfJefe; //choice entre los usuarios
+    TextField tfJefe; //a desarrollar más adelante, un choice/combo entre la lista de usuarios que hay
 
     ProyectoOB proyecto;
+
+    @FXML
+    public void initialize() {
+        cbTipoProyecto.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
+        cbCalificacion.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
+
+        cbEstado.getItems().addAll("activo", "inactivo");
+
+        cbBajadaCalificacion.getItems().addAll(true, false);
+        cbCooperacion.getItems().addAll(true, false);
+    }
 
     public void setProyecto(ProyectoOB proyecto) {
         this.proyecto=proyecto;
@@ -45,19 +57,11 @@ public class FormController {
             dpCreacion.setValue(proyecto.getFechaCreacion().toLocalDate());
             dpCreacion.setDisable(true);
             dpEjecucion.setValue(proyecto.getFechaEjInicio());
-            tfTipoProyecto.setText(proyecto.getTipo());
-            tfEstado.setText(proyecto.getEstado());
-            tfCalificacion.setText(proyecto.getCalificacion());
-            if (proyecto.isBajadaCalificacion()){
-                tfBajadaCalificacion.setText("true");
-            }else {
-                tfBajadaCalificacion.setText("false");
-            }
-            if (proyecto.isEnCooperacion()){
-                tfCooperacion.setText("true");
-            }else {
-                tfCooperacion.setText("false");
-            }
+            cbTipoProyecto.setValue(proyecto.getTipo());
+            cbEstado.setValue(proyecto.getEstado());
+            cbCalificacion.setValue(proyecto.getCalificacion());
+            cbBajadaCalificacion.setValue(proyecto.isBajadaCalificacion());
+            cbCooperacion.setValue(proyecto.isEnCooperacion());
             tfFases.setText(String.valueOf(proyecto.getFases()));
             tfJefe.setText(String.valueOf(proyecto.getJefeId()));
         } else {
@@ -67,11 +71,11 @@ public class FormController {
             dpCreacion.setValue(LocalDate.now());
             dpCreacion.setDisable(true);
             dpEjecucion.setValue(LocalDate.now());
-            tfTipoProyecto.setText("");
-            tfEstado.setText("");
-            tfCalificacion.setText("");
-            tfBajadaCalificacion.setText("false");
-            tfCooperacion.setText("false");
+            cbTipoProyecto.setValue(null);
+            cbEstado.setValue(null);
+            cbCalificacion.setValue(null);
+            cbBajadaCalificacion.setValue(false);
+            cbCooperacion.setValue(false);
             tfFases.setText("");
             tfJefe.setText("");
         }
@@ -81,7 +85,6 @@ public class FormController {
     public void guardar() {
         try {
             //tiene que hacer comprobación de no ser nulo algún dato
-            //voy a comprobar solo si el nombre es vacío pero para tener la estructura y luego poder añadir más con un or
             if (tfNombre.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Rellena los campos");
                 alert.showAndWait();
@@ -98,28 +101,8 @@ public class FormController {
                 return;
             }
 
-            if (!tfBajadaCalificacion.getText().toLowerCase().trim().equals("true")&&!tfBajadaCalificacion.getText().toLowerCase().trim().equals("false")){
-                mostrarAlerta("Bajada de calificación debe ser true o false");
-                return;
-            }
-
-            ArrayList<String> tipos = new ArrayList<>();
-            tipos.add("IT");
-            tipos.add("I+D");
-            tipos.add("I+D+i");
-            tipos.add("I+D+IT");
-            if (!tipos.contains(tfTipoProyecto.getText())){
-                mostrarAlerta("Tipo no válido");
-                return;
-            }
-
-            if (!tipos.contains(tfCalificacion.getText())){
-                mostrarAlerta("Calificación no válida");
-                return;
-            }
-
-            if (!tfEstado.getText().equals("activo") && !tfEstado.getText().equals("inactivo")){
-                mostrarAlerta("Estado debe ser activo o inactivo");
+            if (cbTipoProyecto.getValue()==null || cbEstado.getValue()==null || cbCalificacion.getValue()==null || cbBajadaCalificacion.getValue()==null || cbCooperacion.getValue()==null){
+                mostrarAlerta("Selecciona valores en todos los combobox");
                 return;
             }
 
@@ -133,16 +116,17 @@ public class FormController {
             LocalDateTime fechaCreacion = LocalDateTime.now();
             LocalDate fechaEjInicio = dpEjecucion.getValue();
             LocalDate fechaEjFinal = null;
-            String tipo = tfTipoProyecto.getText();
+            String tipo = cbTipoProyecto.getValue();
+            String calificacion = cbCalificacion.getValue();
             int activo;
-            if (tfEstado.getText().equalsIgnoreCase("activo")) {
+            if (cbEstado.getValue().equals("activo")) {
                 activo = 1;
             } else {
                 activo = 0;
             }
-            String calificacion = tfCalificacion.getText();
-            boolean bajadaCalificacion = Boolean.parseBoolean(tfBajadaCalificacion.getText());
-            boolean enCooperacion = Boolean.parseBoolean(tfCooperacion.getText());
+            boolean bajadaCalificacion = cbBajadaCalificacion.getValue();
+            boolean enCooperacion = cbCooperacion.getValue();
+
             int fases = Integer.parseInt(tfFases.getText());
             int jefeId = Integer.parseInt(tfJefe.getText());
 
