@@ -11,6 +11,10 @@ public class SQL {
     static String pass;
     static ArrayList<ProyectoOB>lista;
 
+    static int id_rol;
+
+    static int id_usuario;
+
     public static void consulta(String consulta) {
         String url = "jdbc:mysql://localhost:3306/trabajo_sge";
         String user = "root";
@@ -147,5 +151,62 @@ public class SQL {
 
         return listaUsuarios;
     }
+
+   public static void auditoria(String consulta) {
+        String url = "jdbc:mysql://localhost:3306/trabajo_sge";
+        String user = "root";
+        String password = "root";
+        double salida;
+        ResultSet resultado;
+        Statement st;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(url, user, password);
+            st = conexion.createStatement();
+            resultado = st.executeQuery(consulta);
+            while (resultado.next()) {
+                id_usuario = resultado.getInt("id");
+            }
+            st.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SQL.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Class not found.");
+        } catch (SQLException e) {
+            Logger.getLogger(SQL.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+    }
+
+    public static void comprobar_permisos(String consulta) {
+        String url = "jdbc:mysql://localhost:3306/trabajo_sge";
+        String user = "root";
+        String password = "root";
+        double salida;
+        ResultSet resultado;
+        Statement st;
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(url, user, password);
+            st = conexion.createStatement();
+            resultado = st.executeQuery(consulta);
+            while (resultado.next()) {
+
+                id_rol = resultado.getInt("rol_id");
+            }
+            st.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SQL.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Class not found.");
+        } catch (SQLException e) {
+            Logger.getLogger(SQL.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+    }
+
+
+
+
 
 }

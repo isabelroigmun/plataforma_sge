@@ -1,12 +1,19 @@
 package com.example.plataforma_sge;
 
+import com.mongodb.client.MongoCollection;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import org.bson.Document;
+
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class FormController {
     @FXML
@@ -194,6 +201,30 @@ public class FormController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error al guardar proyecto: " + e.getMessage());
             alert.showAndWait();
         }
+
+        SQL.auditoria("SELECT id from usuarios");
+        pasarAuditoriaAMongo();
+
+
+    }
+
+    public void pasarAuditoriaAMongo() {
+
+        MongoCollection<Document> collection =
+                MongoDBConnection.getDatabase().getCollection("auditoria");
+
+
+            Document doc = new Document()
+                    .append("id_usuario", SQL.id_usuario)
+                    .append("Acción", "Crear proyecto")
+                    .append("Fecha de acción", Date.from(
+                            LocalDateTime.now()
+                                    .atZone(ZoneId.systemDefault())
+                                    .toInstant()
+                    ));
+
+
+            collection.insertOne(doc);
     }
 
     @FXML

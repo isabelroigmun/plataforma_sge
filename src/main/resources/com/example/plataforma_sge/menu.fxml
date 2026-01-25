@@ -2,12 +2,12 @@
 
 <?import javafx.scene.control.*?>
 
-<MenuBar xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
-   <menus>
-      <Menu mnemonicParsing="false" text="_Inicio"/>
-       <Menu mnemonicParsing="false" text="_Proyectos"/>
-       <Menu mnemonicParsing="false" text="_Estadísticas"/>
-       <Menu mnemonicParsing="false" text="_Usuarios"/>
-       <Menu mnemonicParsing="false" text="_Auditoría"/>
-   </menus>
-</MenuBar>
+<ToolBar fx:id="TolBar" prefHeight="40.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.MenuController">
+  <items>
+    <Button mnemonicParsing="false" text="Inicio" />
+      <Button mnemonicParsing="false" onAction="#change_proyectos" text="Proyectos" />
+      <Button mnemonicParsing="false" text="Estadísticas" />
+      <Button mnemonicParsing="false" text="Usuarios" />
+      <Button mnemonicParsing="false" onAction="#change_auditoria" text="Auditoría" />
+  </items>
+</ToolBar>
