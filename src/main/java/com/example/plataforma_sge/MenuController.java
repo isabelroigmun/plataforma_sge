@@ -36,7 +36,7 @@ public class MenuController {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Permisos insuficientes");
             alert.setHeaderText("Permisos insuficientes");
-            alert.setContentText("Losentimos, no tiene los permisos suficientes para acceder a este contenido, contacte con su jefe. ");
+            alert.setContentText("Contacte con su superior. ");
 
             alert.showAndWait();
         }

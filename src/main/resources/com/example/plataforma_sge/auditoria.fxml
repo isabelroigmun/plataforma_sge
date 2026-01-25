@@ -2,13 +2,18 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-
-
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.AuditoriaController">
 
     <fx:include source="menu.fxml" />
+   <TableView fx:id="tabla_auditoria" prefHeight="352.0" prefWidth="600.0">
+     <columns>
+       <TableColumn fx:id="id_mongo" prefWidth="75.0" text="id" />
+       <TableColumn fx:id="accion" prefWidth="75.0" text="Acción" />
+         <TableColumn fx:id="id_usuario" prefWidth="75.0" text="Usuario" />
+         <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
+     </columns>
+   </TableView>
 
     <children>
       <Label text="funciona" />

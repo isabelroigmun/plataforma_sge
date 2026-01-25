@@ -105,6 +105,8 @@ public class ProyectosController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        tableProyectos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);//columnas del tamaño de la ventana
         tabla();
     }
 }
