@@ -9,10 +9,10 @@ public class SQL {
 
     static String usuario;
     static String pass;
-    static ArrayList<ProyectoOB>lista;
+    static ArrayList<ProyectoOB> listaProyectos;
+    static ArrayList<UsuarioOB> listaUsuarios;
 
     static int id_rol;
-
     static int id_usuario;
 
     public static void consulta(String consulta) {
@@ -49,7 +49,7 @@ public class SQL {
         double salida;
         ResultSet resultado;
         Statement st;
-        lista = new ArrayList<>();
+        listaProyectos = new ArrayList<>();
 
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -84,7 +84,42 @@ public class SQL {
                 //ENTONCES FALTA MODIFICAR ESTO PARA QUE VAYA BIEN, DE MOMENTO LO COMENTO Y
                 // LO DEJO PROVISIONALMENTE MAL PERO BUENO YA LO CAMBIAMOS CUANDO SE PUEDA
                 ProyectoOB p = new ProyectoOB(codigo,nombre,fechaCreacion,fechaEjInicio,fechaEjFinal,tipo,estado,calificacion,bajadaCalificacion,enCooperacion,fases,jefeId);
-                lista.add(p);
+                listaProyectos.add(p);
+            }
+            st.close();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(SQL.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("Class not found.");
+        } catch (SQLException e) {
+            Logger.getLogger(SQL.class.getName()).log(Level.SEVERE, null, e);
+            System.out.println("SQL Error: " + e.getMessage());
+        }
+    }
+
+    public static void sacar_usuarios(String consulta){
+        String url = "jdbc:mysql://localhost:3306/trabajo_sge";
+        String user = "root";
+        String password = "root";
+        double salida;
+        ResultSet resultado;
+        Statement st;
+        listaUsuarios = new ArrayList<>();
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(url, user, password);
+            st = conexion.createStatement();
+            resultado = st.executeQuery(consulta);
+            while (resultado.next()) {
+                int id = resultado.getInt("id");
+                String nombre = resultado.getString("nombre");
+                String apellidos = resultado.getString("apellidos");
+                String usuario = resultado.getString("usuario");
+                String contra = resultado.getString("contraseña");
+                int rol = resultado.getInt("rol_id");
+
+                UsuarioOB u = new UsuarioOB(id, nombre, apellidos, usuario, contra, rol);
+                listaUsuarios.add(u);
             }
             st.close();
         } catch (ClassNotFoundException ex) {
@@ -152,7 +187,37 @@ public class SQL {
         return listaUsuarios;
     }
 
-   public static void auditoria(String consulta) {
+    public static ArrayList<RolOB> getRoles() {
+        ArrayList<RolOB> listaRoles = new ArrayList<>();
+        String url = "jdbc:mysql://localhost:3306/trabajo_sge";
+        String user = "root";
+        String password = "root";
+
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            Connection conexion = DriverManager.getConnection(url, user, password);
+            Statement st = conexion.createStatement();
+            ResultSet rs = st.executeQuery("SELECT id, nombre, descripcion FROM roles");
+
+            while (rs.next()) {
+                listaRoles.add(new RolOB(
+                        rs.getInt("id"),
+                        rs.getString("nombre"),
+                        rs.getString("descripcion")
+                ));
+            }
+
+            st.close();
+            conexion.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return listaRoles;
+    }
+
+
+    public static void auditoria(String consulta) {
         String url = "jdbc:mysql://localhost:3306/trabajo_sge";
         String user = "root";
         String password = "root";
