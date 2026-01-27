@@ -7,7 +7,7 @@
     <Button mnemonicParsing="false" text="Inicio" />
       <Button mnemonicParsing="false" onAction="#change_proyectos" text="Proyectos" />
       <Button mnemonicParsing="false" text="Estadísticas" />
-      <Button mnemonicParsing="false" text="Usuarios" />
+      <Button mnemonicParsing="false" onAction="#change_usuarios" text="Usuarios" />
       <Button mnemonicParsing="false" onAction="#change_auditoria" text="Auditoría" />
   </items>
 </ToolBar>
