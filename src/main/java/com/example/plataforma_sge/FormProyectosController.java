@@ -11,11 +11,9 @@ import org.bson.Document;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
-public class FormController {
+public class FormProyectosController {
     @FXML
     Label txtPrincipal;
 
