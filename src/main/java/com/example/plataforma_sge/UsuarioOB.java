@@ -70,4 +70,18 @@ public class UsuarioOB {
         return getUsuario(); //esto sirve para que en el formulario de crear/editar proyecto se muestre el usuario en el combobox
     }
 
+    public String getNombreRol() {
+        //esto sirve para que en la tabla de usuarios aparezca el nombre del rol en vez del número
+        switch (rol) {
+            case 1:
+                return "Administrador";
+            case 2:
+                return "Lectura";
+            case 3:
+                return "Escritura";
+            default:
+                return "Desconocido";
+        }
+    }
+
 }
