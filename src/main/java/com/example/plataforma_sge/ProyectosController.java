@@ -45,8 +45,8 @@ public class ProyectosController implements Initializable {
     public void tabla(){
         SQL.sacar_proyectos("SELECT * FROM PROYECTOS");
         final ObservableList<ProyectoOB> datos = FXCollections.observableArrayList(); //poder sacar los movimientos ordenados
-        if (SQL.lista != null) {
-            datos.setAll(SQL.lista);
+        if (SQL.listaProyectos != null) {
+            datos.setAll(SQL.listaProyectos);
         }
 
         code.setCellValueFactory(new PropertyValueFactory<ProyectoOB, Integer>("codigo"));
@@ -85,7 +85,7 @@ public class ProyectosController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("form-proyecto.fxml"));
             Parent root = loader.load();
 
-            FormController form = loader.getController();
+            FormProyectosController form = loader.getController();
             form.setProyecto(p);
 
             Stage stage = new Stage();
