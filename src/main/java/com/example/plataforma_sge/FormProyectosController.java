@@ -201,29 +201,14 @@ public class FormProyectosController {
         }
 
         SQL.auditoria("SELECT id from usuarios where usuario= '"+SQL.usuario+"'" );
-        pasarAuditoriaAMongo();
+
+
+
 
 
     }
 
-    public void pasarAuditoriaAMongo() {
 
-        MongoCollection<Document> collection =
-                MongoDBConnection.getDatabase().getCollection("auditoria");
-
-
-            Document doc = new Document()
-                    .append("id_usuario", SQL.id_usuario)
-                    .append("Acción", "Crear proyecto")
-                    .append("Fecha de acción", Date.from(
-                            LocalDateTime.now()
-                                    .atZone(ZoneId.systemDefault())
-                                    .toInstant()
-                    ));
-
-
-            collection.insertOne(doc);
-    }
 
     @FXML
     public void cancelar() {

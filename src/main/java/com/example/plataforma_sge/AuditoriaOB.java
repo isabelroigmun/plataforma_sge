@@ -1,8 +1,12 @@
 package com.example.plataforma_sge;
 
+import com.mongodb.client.MongoCollection;
 import javafx.beans.property.*;
+import org.bson.Document;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.util.Date;
 
 public class AuditoriaOB {
 
@@ -36,5 +40,24 @@ public class AuditoriaOB {
 
     public LocalDateTime getFecha() {
         return fecha;
+    }
+
+    public static void pasarAuditoriaAMongo(String accion) {
+
+        MongoCollection<Document> collection =
+                MongoDBConnection.getDatabase().getCollection("auditoria");
+
+
+        Document doc = new Document()
+                .append("id_usuario", SQL.id_usuario)
+                .append("Acción", accion)
+                .append("Fecha de acción", Date.from(
+                        LocalDateTime.now()
+                                .atZone(ZoneId.systemDefault())
+                                .toInstant()
+                ));
+
+
+        collection.insertOne(doc);
     }
 }

@@ -64,11 +64,14 @@ public class ProyectosController implements Initializable {
         int idSel= sel.getCodigo();
         SQL.vacio("DELETE FROM proyectos where id= "+idSel);
         tabla();
+        AuditoriaOB.pasarAuditoriaAMongo("Borrar proyecto");
+
     }
 
     public void crear(){
         abrirFormulario(null);
         tabla();
+        AuditoriaOB.pasarAuditoriaAMongo("Crear proyecto");
     }
 
     public void editar(){
@@ -78,6 +81,8 @@ public class ProyectosController implements Initializable {
         }
         abrirFormulario(seleccionado);
         tabla();
+        AuditoriaOB.pasarAuditoriaAMongo("Editar proyecto");
+
     }
 
     public void abrirFormulario(ProyectoOB p){
