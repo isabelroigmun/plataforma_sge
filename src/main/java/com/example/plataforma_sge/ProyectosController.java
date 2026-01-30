@@ -71,7 +71,6 @@ public class ProyectosController implements Initializable {
     public void crear(){
         abrirFormulario(null);
         tabla();
-        AuditoriaOB.pasarAuditoriaAMongo("Crear proyecto");
     }
 
     public void editar(){
@@ -81,8 +80,6 @@ public class ProyectosController implements Initializable {
         }
         abrirFormulario(seleccionado);
         tabla();
-        AuditoriaOB.pasarAuditoriaAMongo("Editar proyecto");
-
     }
 
     public void abrirFormulario(ProyectoOB p){

@@ -166,7 +166,7 @@ public class FormProyectosController {
                         enCooperacion + ", " +
                         fases + ", " +
                         jefeId + ")";
-
+                AuditoriaOB.pasarAuditoriaAMongo("Crear proyecto");
                 SQL.vacio(sql);
             } else {
                 //UPDATE en el SQL
@@ -184,7 +184,7 @@ public class FormProyectosController {
                         "fases=" + fases + ", " +
                         "usuarios_id=" + jefeId + " " +
                         "WHERE id=" + codigo;
-
+                AuditoriaOB.pasarAuditoriaAMongo("Editar proyecto");
                 SQL.vacio(sql);
             }
             //cerrar ventana

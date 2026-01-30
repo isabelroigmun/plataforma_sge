@@ -92,6 +92,7 @@ public class FormUsuariosController {
                     "'" + usuarioTxt + "', " +
                     "'" + contra + "', " +
                     rolId + ")";
+            AuditoriaOB.pasarAuditoriaAMongo("Crear usuario");
             SQL.vacio(sql);
         } else {
             // UPDATE
@@ -101,7 +102,7 @@ public class FormUsuariosController {
                     "contraseña='" + contra + "', " +
                     "rol_id=" + rolId + " " +
                     "WHERE id=" + usuario.getId();
-
+            AuditoriaOB.pasarAuditoriaAMongo("Editar usuario");
             SQL.vacio(sql);
         }
 
