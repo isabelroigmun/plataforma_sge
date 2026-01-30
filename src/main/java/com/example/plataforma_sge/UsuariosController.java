@@ -58,11 +58,13 @@ public class UsuariosController implements Initializable {
         int idSel= sel.getId();
         SQL.vacio("DELETE FROM usuarios where id= "+idSel);
         tabla();
+        AuditoriaOB.pasarAuditoriaAMongo("Borrar usuario");
     }
 
     public void crear(){
         abrirFormulario(null);
         tabla();
+        AuditoriaOB.pasarAuditoriaAMongo("Crear usuario");
     }
 
     public void editar(){
@@ -72,6 +74,7 @@ public class UsuariosController implements Initializable {
         }
         abrirFormulario(seleccionado);
         tabla();
+        AuditoriaOB.pasarAuditoriaAMongo("Editar usuario");
     }
 
     public void abrirFormulario(UsuarioOB u){

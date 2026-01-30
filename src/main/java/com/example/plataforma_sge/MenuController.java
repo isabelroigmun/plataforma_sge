@@ -40,9 +40,6 @@ public class MenuController {
 
             alert.showAndWait();
         }
-
-
-
     }
 
     public void change_proyectos() throws IOException {
@@ -56,14 +53,26 @@ public class MenuController {
     }
 
     public void change_usuarios() throws IOException {
+        SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");
 
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("usuarios.fxml"));
-        Parent root= loader.load();
+        int rol= SQL.id_rol;
+        System.out.println(rol);
 
-        Stage stage= (Stage) TolBar.getScene().getWindow();
-        stage.setScene(new Scene(root));
+        if (rol==1){
+            System.out.println("accedo");
+            FXMLLoader loader= new FXMLLoader(getClass().getResource("usuarios.fxml"));
+            Parent root= loader.load();
+
+            Stage stage= (Stage) TolBar.getScene().getWindow();
+            stage.setScene(new Scene(root));
+        }else{
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Permisos insuficientes");
+            alert.setHeaderText("Permisos insuficientes");
+            alert.setContentText("Contacte con su superior. ");
+
+            alert.showAndWait();
+        }
 
     }
-
-
 }
