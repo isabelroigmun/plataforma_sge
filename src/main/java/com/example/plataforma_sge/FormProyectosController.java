@@ -200,7 +200,6 @@ public class FormProyectosController {
             alert.showAndWait();
         }
 
-        SQL.auditoria("SELECT id from usuarios where usuario= '"+SQL.usuario+"'" );
 
 
 

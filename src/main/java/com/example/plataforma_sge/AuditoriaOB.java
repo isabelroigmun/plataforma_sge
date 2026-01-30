@@ -44,6 +44,8 @@ public class AuditoriaOB {
 
     public static void pasarAuditoriaAMongo(String accion) {
 
+        SQL.auditoria("SELECT id from usuarios where usuario= '"+SQL.usuario+"'" );
+
         MongoCollection<Document> collection =
                 MongoDBConnection.getDatabase().getCollection("auditoria");
 
