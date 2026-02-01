@@ -14,7 +14,7 @@
       </font>
    </Label>
 
-   <TableView fx:id="tableProyectos" onSort="#tabla" prefHeight="239.0" prefWidth="600.0">
+   <TableView fx:id="tableProyectos" onSort="#tabla" prefHeight="239.0" prefWidth="600.0" onMouseClicked="#doubleClick">
      <columns>
        <TableColumn fx:id="code" prefWidth="91.66666412353516" text="Código" />
        <TableColumn fx:id="name" prefWidth="152.3333282470703" text="Nombre" />

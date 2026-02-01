@@ -14,6 +14,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -55,6 +56,19 @@ public class ProyectosController implements Initializable {
         state.setCellValueFactory(new PropertyValueFactory<ProyectoOB, String>("estado"));
         boss.setCellValueFactory(new PropertyValueFactory<ProyectoOB, Integer>("jefeId"));
         tableProyectos.setItems(datos);
+
+    }
+
+    public void abrirDocumentos(ProyectoOB p) throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("Documentos.fxml"));
+        Parent root= loader.load();
+
+        DocumentosController form = loader.getController();
+        form.setProyecto(p);
+
+        Stage stage= (Stage) editar.getScene().getWindow();
+        stage.setScene(new Scene(root));
+
 
     }
 
@@ -110,5 +124,12 @@ public class ProyectosController implements Initializable {
 
         tableProyectos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);//columnas del tamaño de la ventana
         tabla();
+    }
+
+    public void doubleClick(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getClickCount()==2){
+            ProyectoOB sel= (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
+            abrirDocumentos(sel);
+        }
     }
 }

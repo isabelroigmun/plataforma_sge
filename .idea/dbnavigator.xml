@@ -11,16 +11,13 @@
   </component>
   <component name="DBNavigator.Project.DatabaseAssistantManager">
     <assistants>
-      <assistant-state connection-id="e325977a-e0c8-4f74-9710-b31876f70af9" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE" selected="true">
-        <tools />
+      <assistant-state connection-id="e325977a-e0c8-4f74-9710-b31876f70af9" default-profile-name="" selected-conversation-id="" assistant-type="SELECT_AI" availability="UNAVAILABLE" acknowledgement="NONE">
+        <conversations />
       </assistant-state>
-      <assistant-state connection-id="virtual-mysql-connection" assistant-type="SELECT_AI" default-profile-name="" selected-chat-id="" availability="UNAVAILABLE" acknowledgement="NONE">
-        <tools />
+      <assistant-state connection-id="virtual-mysql-connection" default-profile-name="" selected-conversation-id="" assistant-type="SELECT_AI" availability="UNAVAILABLE" acknowledgement="NONE">
+        <conversations />
       </assistant-state>
     </assistants>
-    <selection-state>
-      <model-selection />
-    </selection-state>
   </component>
   <component name="DBNavigator.Project.DatabaseBrowserManager">
     <autoscroll-to-editor value="false" />
@@ -29,8 +26,8 @@
     <loaded-nodes />
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="e325977a-e0c8-4f74-9710-b31876f70af9">
-      <console name="Connection" type="STANDARD" schema="trabajo_sge" session="Main" />
+    <connection id="96339f1f-0a54-44e3-805c-027ca75a1bd5">
+      <console name="Connection" type="STANDARD" schema="mysql" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseEditorStateManager">
@@ -55,7 +52,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection source-id="" id="e325977a-e0c8-4f74-9710-b31876f70af9" active="true" signed="true">
+      <connection source-id="" id="96339f1f-0a54-44e3-805c-027ca75a1bd5" active="true" signed="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -68,7 +65,7 @@
           <url-type value="DATABASE" />
           <host value="localhost" />
           <port value="3306" />
-          <database value="trabajo_sge" />
+          <database value="mysql" />
           <tns-folder value="" />
           <tns-profile value="" />
           <server-type value="" />
@@ -79,12 +76,6 @@
           <token-type value="" />
           <token-config-file value="" />
           <token-profile value="" />
-          <adb-compartment-ocid value="" />
-          <adb-database-ocid value="" />
-          <azure-token-database-id-uri value="" />
-          <azure-token-tenant-id value="" />
-          <azure-token-client-id value="" />
-          <azure-token-client-certificate-file value="" />
           <session-user value="root@localhost" />
         </database>
         <properties>
@@ -122,20 +113,11 @@
         </details>
         <debugger>
           <compile-dependencies value="true" />
+          <tcp-driver-tunneling value="false" />
           <tcp-host-address value="" />
           <tcp-port-from value="4000" />
           <tcp-port-to value="4999" />
-          <jdwp-tunnel-type value="NONE" />
           <debugger-type value="ASK" />
-          <reverse-ssh-tunnel>
-            <host value="" />
-            <port value="22" />
-            <bind-host value="127.0.0.1" />
-            <bind-port value="0" />
-            <auth-type value="PASSWORD" />
-            <user value="" />
-            <key-file value="" />
-          </reverse-ssh-tunnel>
         </debugger>
         <object-filters hide-empty-schemas="false" hide-pseudo-columns="false" hide-audit-columns="false">
           <object-filters />
@@ -172,7 +154,6 @@
             <object-type name="DBLINK" enabled="true" />
             <object-type name="CREDENTIAL" enabled="true" />
             <object-type name="AI_PROFILE" enabled="true" />
-            <object-type name="AI_MODEL" enabled="true" />
           </object-type-filter>
         </object-filters>
       </connection>
@@ -219,7 +200,6 @@
           <object-type name="DBLINK" enabled="true" />
           <object-type name="CREDENTIAL" enabled="true" />
           <object-type name="AI_PROFILE" enabled="true" />
-          <object-type name="AI_MODEL" enabled="true" />
         </object-type-filter>
       </filters>
       <sorting>
@@ -527,11 +507,6 @@
         <debug-execution-timeout value="600" />
         <parameter-history-size value="10" />
       </method-execution>
-      <method-execution>
-        <execution-timeout value="30" />
-        <debug-execution-timeout value="600" />
-        <parameter-history-size value="10" />
-      </method-execution>
     </execution-engine-settings>
     <operation-settings>
       <transactions>
@@ -582,9 +557,6 @@
       <credential-settings>
         <credentials />
       </credential-settings>
-      <profile-settings>
-        <profiles />
-      </profile-settings>
     </assistant-settings>
     <general-settings>
       <regional-settings>
