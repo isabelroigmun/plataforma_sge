@@ -14,8 +14,4 @@
          <TableColumn fx:id="fecha" prefWidth="75.0" text="Fecha" />
      </columns>
    </TableView>
-
-    <children>
-      <Label text="funciona" />
-   </children>
 </VBox>
