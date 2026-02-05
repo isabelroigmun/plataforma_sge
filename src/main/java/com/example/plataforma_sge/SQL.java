@@ -78,11 +78,6 @@ public class SQL {
                 boolean enCooperacion = resultado.getBoolean("en_cooperacion");
                 int fases = resultado.getInt("fases");
                 int jefeId = resultado.getInt("usuarios_id");
-
-                //LA CLASE PROYECTO NO TENÍA TODOS LOS ATRIBUTOS Y LOS HE TENIDO QUE METER PARA HACER
-                //EL BOTÓN DE CREAR Y EDITAR (TENGO QUE TENER TODOS LOS DATOS PARA QUE VAYA BIEN)
-                //ENTONCES FALTA MODIFICAR ESTO PARA QUE VAYA BIEN, DE MOMENTO LO COMENTO Y
-                // LO DEJO PROVISIONALMENTE MAL PERO BUENO YA LO CAMBIAMOS CUANDO SE PUEDA
                 ProyectoOB p = new ProyectoOB(codigo,nombre,fechaCreacion,fechaEjInicio,fechaEjFinal,tipo,estado,calificacion,bajadaCalificacion,enCooperacion,fases,jefeId);
                 listaProyectos.add(p);
             }

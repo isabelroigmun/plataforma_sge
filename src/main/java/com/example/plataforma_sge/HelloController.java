@@ -42,7 +42,7 @@ public class HelloController {
 
     private void cambiarEscena() throws IOException {
 
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("proyectos.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("inicio.fxml"));
         Parent root= loader.load();
 
         Stage stage= (Stage) estado.getScene().getWindow();

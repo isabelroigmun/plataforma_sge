@@ -73,6 +73,15 @@ public class MenuController {
 
             alert.showAndWait();
         }
+    }
+
+    public void change_inicio() throws IOException {
+
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("inicio.fxml"));
+        Parent root= loader.load();
+
+        Stage stage= (Stage) TolBar.getScene().getWindow();
+        stage.setScene(new Scene(root));
 
     }
 }

@@ -4,10 +4,9 @@
 
 <ToolBar fx:id="TolBar" prefHeight="40.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.MenuController">
   <items>
-    <Button mnemonicParsing="false" text="Inicio" />
-      <Button mnemonicParsing="false" onAction="#change_proyectos" text="Proyectos" />
-      <Button mnemonicParsing="false" text="Estadísticas" />
-      <Button mnemonicParsing="false" onAction="#change_usuarios" text="Usuarios" />
-      <Button mnemonicParsing="false" onAction="#change_auditoria" text="Auditoría" />
+    <Button mnemonicParsing="false" onAction="#change_inicio" text="Inicio" />
+    <Button mnemonicParsing="false" onAction="#change_proyectos" text="Proyectos" />
+    <Button mnemonicParsing="false" onAction="#change_usuarios" text="Usuarios" />
+    <Button mnemonicParsing="false" onAction="#change_auditoria" text="Auditoría" />
   </items>
 </ToolBar>
