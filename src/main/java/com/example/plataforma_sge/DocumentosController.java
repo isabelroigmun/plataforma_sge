@@ -1,5 +1,7 @@
 package com.example.plataforma_sge;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -7,8 +9,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -39,11 +46,38 @@ public class DocumentosController implements Initializable {
     Label fases;
     @FXML
     Label usuarios_id;
+    @FXML
+    ListView documentos;
 
     ProyectoOB proyecto;
 
+    private int id_proyecto;
+    private PDFServicio servicio= new PDFServicio();
+    private File selectedFile;
 
+    public void setid_proyecto(int id_proyecto){
+        this.id_proyecto=id_proyecto;
+        cargarPDF();
+    }
 
+    private void cargarPDF() {
+        documentos.getItems().setAll(servicio.doc_proyecto(id_proyecto));
+    }
+
+    public void updateDocumentos(){
+        JFileChooser selector = new JFileChooser();
+        selector.setDialogTitle("Selecciona el archivo a enviar");
+        FileNameExtensionFilter filtro = new FileNameExtensionFilter("ARCHIVOS PDF", "pdf");
+        selector.setFileFilter(filtro);
+
+        int resultado = selector.showOpenDialog(null);
+
+        if (resultado == JFileChooser.APPROVE_OPTION) {
+            File archivo_seleccionado = selector.getSelectedFile();
+            servicio.addpdf(id_proyecto,archivo_seleccionado);
+        }
+
+    }
 
 
     @Override
@@ -75,4 +109,8 @@ public class DocumentosController implements Initializable {
         Stage stage= (Stage) id.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
+
+
+
+
 }

@@ -66,6 +66,8 @@ public class ProyectosController implements Initializable {
         DocumentosController form = loader.getController();
         form.setProyecto(p);
 
+        form.setid_proyecto(p.getCodigo());
+
         Stage stage= (Stage) editar.getScene().getWindow();
         stage.setScene(new Scene(root));
 
