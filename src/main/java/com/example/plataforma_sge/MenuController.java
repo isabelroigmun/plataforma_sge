@@ -52,6 +52,16 @@ public class MenuController {
 
     }
 
+    public void change_buscador() throws IOException {
+
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("buscador.fxml"));
+        Parent root= loader.load();
+
+        Stage stage= (Stage) TolBar.getScene().getWindow();
+        stage.setScene(new Scene(root));
+
+    }
+
     public void change_usuarios() throws IOException {
         SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");
 

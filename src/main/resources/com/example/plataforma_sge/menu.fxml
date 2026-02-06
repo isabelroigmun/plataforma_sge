@@ -6,6 +6,7 @@
   <items>
     <Button mnemonicParsing="false" onAction="#change_inicio" text="Inicio" />
     <Button mnemonicParsing="false" onAction="#change_proyectos" text="Proyectos" />
+    <Button mnemonicParsing="false" onAction="#change_buscador" text="Buscador" />
     <Button mnemonicParsing="false" onAction="#change_usuarios" text="Usuarios" />
     <Button mnemonicParsing="false" onAction="#change_auditoria" text="Auditoría" />
   </items>
