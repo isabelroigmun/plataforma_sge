@@ -124,4 +124,12 @@ public class DocumentosController implements Initializable {
         Stage stage= (Stage) id.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
+
+    public void volver_buscador() throws IOException {
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("buscador.fxml"));
+        Parent root= loader.load();
+
+        Stage stage= (Stage) id.getScene().getWindow();
+        stage.setScene(new Scene(root));
+    }
 }
