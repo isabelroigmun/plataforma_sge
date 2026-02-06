@@ -39,6 +39,8 @@ public class FormProyectosController {
     TextField tfFases;
     @FXML
     ComboBox<UsuarioOB> cbJefe; //un choice/combo entre la lista de usuarios que hay
+    @FXML
+    TextField tfPalabrasClave;
 
     ProyectoOB proyecto;
 
@@ -76,6 +78,7 @@ public class FormProyectosController {
                     break;
                 }
             }
+            tfPalabrasClave.setText(proyecto.getPalabrasClave());
         } else {
             txtPrincipal.setText("Crear proyecto");
 
@@ -92,6 +95,7 @@ public class FormProyectosController {
             cbCooperacion.setValue(false);
             tfFases.setText("");
             cbJefe.setValue(null);
+            tfPalabrasClave.setText("");
         }
     }
 
@@ -99,7 +103,7 @@ public class FormProyectosController {
     public void guardar() {
         try {
             //tiene que hacer comprobación de no ser nulo algún dato
-            if (tfNombre.getText().isEmpty()) {
+            if (tfNombre.getText().isEmpty() || tfPalabrasClave.getText().isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.WARNING, "Rellena los campos");
                 alert.showAndWait();
                 return;
@@ -147,25 +151,26 @@ public class FormProyectosController {
             }
             boolean bajadaCalificacion = cbBajadaCalificacion.getValue();
             boolean enCooperacion = cbCooperacion.getValue();
-
             int fases = Integer.parseInt(tfFases.getText());
             int jefeId = jefeSeleccionado.getId();
+            String palabrasClave = tfPalabrasClave.getText();
 
             if (proyecto == null) {
                 //INSERT en el SQL
                 String sql = "INSERT INTO proyectos " +
-                        "(nombre, fecha_creacion, fecha_ej_inicio, fecha_ej_final, tipo_proyecto, activo, calificacion, bajada_calificacion, en_cooperacion, fases, usuarios_id) VALUES (" +
+                        "(nombre, fecha_creacion, fecha_ej_inicio, fecha_ej_final, tipo_proyecto, activo, calificacion, bajada_calificacion, en_cooperacion, fases, usuarios_id, key_words) VALUES (" +
                         "'" + nombre + "', " +
                         "'" + fechaCreacion + "', " +
                         "'" + fechaEjInicio + "', " +
-                        "NULL, "+
+                        "NULL, " +
                         "'" + tipo + "', " +
                         activo + ", " +
                         "'" + calificacion + "', " +
                         bajadaCalificacion + ", " +
                         enCooperacion + ", " +
                         fases + ", " +
-                        jefeId + ")";
+                        jefeId + ", " +
+                        "'" + palabrasClave + "'" + ")";
                 AuditoriaOB.pasarAuditoriaAMongo("Crear proyecto");
                 SQL.vacio(sql);
             } else {
@@ -182,8 +187,10 @@ public class FormProyectosController {
                         "bajada_calificacion=" + bajadaCalificacion + ", " +
                         "en_cooperacion=" + enCooperacion + ", " +
                         "fases=" + fases + ", " +
-                        "usuarios_id=" + jefeId + " " +
+                        "usuarios_id=" + jefeId + ", " +
+                        "key_words='" + palabrasClave + "' " +
                         "WHERE id=" + codigo;
+
                 AuditoriaOB.pasarAuditoriaAMongo("Editar proyecto");
                 SQL.vacio(sql);
             }

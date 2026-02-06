@@ -18,8 +18,9 @@ public class ProyectoOB {
     private boolean enCooperacion;
     private int fases;
     private int jefeId; //PROVISIONAL (?)
+    private String palabrasClave;
 
-    public ProyectoOB(int codigo, String nombre, LocalDateTime fechaCreacion, LocalDate fechaEjInicio, LocalDate fechaEjFinal, String tipo, String estado, String calificacion, boolean bajadaCalificacion, boolean enCooperacion, int fases, int jefeId) {
+    public ProyectoOB(int codigo, String nombre, LocalDateTime fechaCreacion, LocalDate fechaEjInicio, LocalDate fechaEjFinal, String tipo, String estado, String calificacion, boolean bajadaCalificacion, boolean enCooperacion, int fases, int jefeId, String palabrasClave) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.fechaCreacion = fechaCreacion;
@@ -32,9 +33,9 @@ public class ProyectoOB {
         this.enCooperacion = enCooperacion;
         this.fases = fases;
         this.jefeId = jefeId;
+        this.palabrasClave = palabrasClave;
     }
 
-    //GETTERS Y SETTERS
     public int getCodigo() {
         return codigo;
     }
@@ -129,5 +130,13 @@ public class ProyectoOB {
 
     public void setJefeId(int jefeId) {
         this.jefeId = jefeId;
+    }
+
+    public String getPalabrasClave() {
+        return palabrasClave;
+    }
+
+    public void setPalabrasClave(String palabrasClave) {
+        this.palabrasClave = palabrasClave;
     }
 }

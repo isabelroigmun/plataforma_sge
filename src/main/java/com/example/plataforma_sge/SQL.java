@@ -78,7 +78,8 @@ public class SQL {
                 boolean enCooperacion = resultado.getBoolean("en_cooperacion");
                 int fases = resultado.getInt("fases");
                 int jefeId = resultado.getInt("usuarios_id");
-                ProyectoOB p = new ProyectoOB(codigo,nombre,fechaCreacion,fechaEjInicio,fechaEjFinal,tipo,estado,calificacion,bajadaCalificacion,enCooperacion,fases,jefeId);
+                String palabrasClave = resultado.getString("key_words");
+                ProyectoOB p = new ProyectoOB(codigo,nombre,fechaCreacion,fechaEjInicio,fechaEjFinal,tipo,estado,calificacion,bajadaCalificacion,enCooperacion,fases,jefeId,palabrasClave);
                 listaProyectos.add(p);
             }
             st.close();
@@ -172,13 +173,11 @@ public class SQL {
                         rs.getInt("rol_id")
                 ));
             }
-
             st.close();
             conexion.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return listaUsuarios;
     }
 
@@ -201,13 +200,11 @@ public class SQL {
                         rs.getString("descripcion")
                 ));
             }
-
             st.close();
             conexion.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         return listaRoles;
     }
 
@@ -264,9 +261,4 @@ public class SQL {
             System.out.println("SQL Error: " + e.getMessage());
         }
     }
-
-
-
-
-
 }

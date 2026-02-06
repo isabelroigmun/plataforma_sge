@@ -50,6 +50,8 @@ public class DocumentosController implements Initializable {
     Label usuarios_id;
     @FXML
     ListView documentos;
+    @FXML
+    Label palabras_clave;
 
     ProyectoOB proyecto;
 
@@ -110,6 +112,7 @@ public class DocumentosController implements Initializable {
             en_cooperacion.setText("¿EN COOPERACIÓN?: "+String.valueOf(proyecto.isEnCooperacion()));
             fases.setText("FASES: "+String.valueOf(proyecto.getFases()));
             usuarios_id.setText("JEFE DE PROYECTO: "+String.valueOf(proyecto.getJefeId()));
+            palabras_clave.setText("PALABRAS CLAVE: "+proyecto.getPalabrasClave());
         }
     }
 
@@ -120,8 +123,4 @@ public class DocumentosController implements Initializable {
         Stage stage= (Stage) id.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
-
-
-
-
 }
