@@ -88,6 +88,7 @@ public class DocumentosController implements Initializable {
         if (resultado == JFileChooser.APPROVE_OPTION) {
             File archivo_seleccionado = selector.getSelectedFile();
             servicio.addpdf(id_proyecto,archivo_seleccionado);
+            cargarPDF();
         }
 
     }
