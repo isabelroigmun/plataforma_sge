@@ -60,7 +60,7 @@ public class ProyectosController implements Initializable {
     }
 
     public void abrirDocumentos(ProyectoOB p) throws IOException {
-        FXMLLoader loader= new FXMLLoader(getClass().getResource("Documentos.fxml"));
+        FXMLLoader loader= new FXMLLoader(getClass().getResource("documentos.fxml"));
         Parent root= loader.load();
 
         DocumentosController form = loader.getController();
