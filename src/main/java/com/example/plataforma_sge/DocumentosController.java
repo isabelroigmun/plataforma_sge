@@ -12,12 +12,14 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.bson.Document;
 
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.io.File;
-import java.io.IOException;
+import java.awt.*;
+import java.io.*;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
 public class DocumentosController implements Initializable {
@@ -63,6 +65,15 @@ public class DocumentosController implements Initializable {
     private void cargarPDF() {
         documentos.getItems().setAll(servicio.doc_proyecto(id_proyecto));
     }
+
+    public void doubleClick(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getClickCount()==2){
+            String sel= (String) documentos.getSelectionModel().getSelectedItem();
+            servicio.abrirVentanaDesdeMongo(sel);
+        }
+    }
+
+
 
     public void updateDocumentos(){
         JFileChooser selector = new JFileChooser();

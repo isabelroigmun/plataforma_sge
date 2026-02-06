@@ -34,7 +34,7 @@
                   <Font size="22.0" />
                </font>
             </Label>
-            <ListView fx:id="documentos" prefHeight="200.0" prefWidth="200.0" />
+            <ListView fx:id="documentos" prefHeight="200.0" prefWidth="200.0" onMouseClicked="#doubleClick"/>
             <Button mnemonicParsing="false" onAction="#updateDocumentos" text="Añadir documento" />
          </children></VBox>
    </children>
