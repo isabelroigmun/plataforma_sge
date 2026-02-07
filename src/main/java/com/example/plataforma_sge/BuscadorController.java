@@ -34,8 +34,7 @@ public class BuscadorController implements Initializable {
     TableColumn<ProyectoOB, Integer> boss;
     @FXML
     TextField tfBuscador;
-    @FXML
-    Button editar;
+
 
     public void abrirDocumentos(ProyectoOB p) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("documentos.fxml"));
@@ -46,7 +45,7 @@ public class BuscadorController implements Initializable {
 
         form.setid_proyecto(p.getCodigo());
 
-        Stage stage= (Stage) editar.getScene().getWindow();
+        Stage stage= (Stage) tableProyectos.getScene().getWindow();
         stage.setScene(new Scene(root));
     }
 
@@ -84,4 +83,6 @@ public class BuscadorController implements Initializable {
         state.setCellValueFactory(new PropertyValueFactory<>("estado"));
         boss.setCellValueFactory(new PropertyValueFactory<>("jefeId"));
     }
+
+
 }
