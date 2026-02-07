@@ -16,7 +16,6 @@ import java.util.Date;
 public class FormProyectosController {
     @FXML
     Label txtPrincipal;
-
     @FXML
     TextField tfCodigo; //no se puede editar
     @FXML
@@ -44,6 +43,7 @@ public class FormProyectosController {
 
     ProyectoOB proyecto;
 
+    //inicializa cargando datos en los combobox
     @FXML
     public void initialize() {
         cbTipoProyecto.getItems().addAll("IT", "I+D", "I+D+i", "I+D+IT");
@@ -55,6 +55,7 @@ public class FormProyectosController {
         cargarUsuarios();
     }
 
+    //comprueba si el proyecto no es nulo, entonces se cargan los datos (editar proyecto) y sino se dejan los campos en blanco (crear proyecto)
     public void setProyecto(ProyectoOB proyecto) {
         this.proyecto=proyecto;
         if (proyecto != null) {
@@ -99,6 +100,7 @@ public class FormProyectosController {
         }
     }
 
+    //funcionalidad del botón guardar
     @FXML
     public void guardar() {
         try {
@@ -206,27 +208,22 @@ public class FormProyectosController {
             Alert alert = new Alert(Alert.AlertType.ERROR, "Error al guardar proyecto: " + e.getMessage());
             alert.showAndWait();
         }
-
-
-
-
-
-
     }
 
-
-
+    //funcionalidad para el botón de cancelar
     @FXML
     public void cancelar() {
         Stage stage = (Stage) tfNombre.getScene().getWindow();
         stage.close();
     }
 
+    //muestra alerta con el mensaje que se introduce
     public void mostrarAlerta(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING, mensaje);
         alert.showAndWait();
     }
 
+    //carga el nombre de los usuarios que hay en la base de datos para el combobox de cefe
     public void cargarUsuarios() {
         cbJefe.getItems().clear();
         cbJefe.getItems().addAll(SQL.getUsuarios());
