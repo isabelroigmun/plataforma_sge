@@ -1,12 +1,12 @@
 package com.example.plataforma_sge;
 
 public class UsuarioOB {
-    private int id;
-    private String nombre;
-    private String apellidos;
-    private String usuario;
-    private String contra;
-    private int rol;
+    private int id; //id del usuario
+    private String nombre; //nombre del usuario
+    private String apellidos; //apellidos del usuario
+    private String usuario; //nombre de usuario
+    private String contra; //contraseña del usuario
+    private int rol; //id del rol del usuario
 
     public UsuarioOB(int id, String nombre, String apellidos, String usuario, String contra, int rol) {
         this.id = id;
@@ -17,6 +17,7 @@ public class UsuarioOB {
         this.rol = rol;
     }
 
+    //GETTERS Y SETTERS
     public int getId() {
         return id;
     }
