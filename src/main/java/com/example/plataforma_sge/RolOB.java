@@ -1,9 +1,9 @@
 package com.example.plataforma_sge;
 
 public class RolOB {
-    private int id;
-    private String nombre;
-    private String descripcion;
+    private int id; //id del rol
+    private String nombre; //nombre del rol
+    private String descripcion; //descripción del rol
 
     public RolOB(int id, String nombre, String descripcion) {
         this.id = id;
@@ -11,6 +11,7 @@ public class RolOB {
         this.descripcion = descripcion;
     }
 
+    //GETTERS Y SETTERS
     public int getId() {
         return id;
     }
