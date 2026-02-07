@@ -7,10 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -35,7 +32,15 @@ public class BuscadorController implements Initializable {
     @FXML
     TextField tfBuscador;
 
+    //este método detecta si se hace doble click en un elemento de la tabla y abre la ventana de documentos
+    public void doubleClick(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getClickCount()==2){
+            ProyectoOB sel= (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
+            abrirDocumentos(sel);
+        }
+    }
 
+    //abre documentos.fxml y le pasa el proyecto seleccionado para que sea capaz de cargar los datos, también se cambia la escena
     public void abrirDocumentos(ProyectoOB p) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("documentos.fxml"));
         Parent root= loader.load();
@@ -49,20 +54,14 @@ public class BuscadorController implements Initializable {
         stage.setScene(new Scene(root));
     }
 
-    public void doubleClick(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
-        if (mouseEvent.getClickCount()==2){
-            ProyectoOB sel= (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
-            abrirDocumentos(sel);
-        }
-    }
 
     public void buscar(){
         String texto = tfBuscador.getText().trim();
 
         if (texto.isEmpty()){
-            SQL.sacar_proyectos("SELECT * FROM proyectos");
+            mostrarAlerta("Introduce algo en el campo de búsqueda");
         } else {
-            SQL.sacar_proyectos("SELECT * FROM proyectos WHERE nombre LIKE '%" + texto + "%' OR key_words LIKE '%" + texto + "%'");
+            SQL.sacar_proyectos("SELECT * FROM proyectos WHERE key_words LIKE '%" + texto + "%'");
         }
 
         ObservableList<ProyectoOB> datos = FXCollections.observableArrayList();
@@ -84,5 +83,8 @@ public class BuscadorController implements Initializable {
         boss.setCellValueFactory(new PropertyValueFactory<>("jefeId"));
     }
 
-
+    public void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING, mensaje);
+        alert.showAndWait();
+    }
 }

@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -92,6 +93,7 @@ public class ProyectosController implements Initializable {
     public void editar(){
         ProyectoOB seleccionado = (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
         if (seleccionado==null){
+            mostrarAlerta("Selecciona un proyecto para poder editarlo");
             return;
         }
         abrirFormulario(seleccionado);
@@ -133,5 +135,10 @@ public class ProyectosController implements Initializable {
             ProyectoOB sel= (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
             abrirDocumentos(sel);
         }
+    }
+
+    public void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING, mensaje);
+        alert.showAndWait();
     }
 }
