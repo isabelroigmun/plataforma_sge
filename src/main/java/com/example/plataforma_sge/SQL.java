@@ -42,6 +42,7 @@ public class SQL {
         }
     }
 
+    //ejecuta una consulta para obtener proyectos y los guarda en la lista listaProyectos
     public static void sacar_proyectos(String consulta){
         String url = "jdbc:mysql://localhost:3306/trabajo_sge";
         String user = "root";
@@ -92,6 +93,7 @@ public class SQL {
         }
     }
 
+    //ejecuta una consulta para obtener usuarios y los guarda en la lista listaUsuarios
     public static void sacar_usuarios(String consulta){
         String url = "jdbc:mysql://localhost:3306/trabajo_sge";
         String user = "root";
@@ -151,6 +153,7 @@ public class SQL {
         }
     }
 
+    //devuelve una lsita con todos los usuarios
     public static ArrayList<UsuarioOB> getUsuarios() {
         ArrayList<UsuarioOB> listaUsuarios = new ArrayList<>();
         String url = "jdbc:mysql://localhost:3306/trabajo_sge";
@@ -161,7 +164,7 @@ public class SQL {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(url, user, password);
             Statement st = conexion.createStatement();
-            ResultSet rs = st.executeQuery("SELECT id, nombre, apellidos, usuario, contraseña, rol_id FROM usuarios");
+            ResultSet rs = st.executeQuery("SELECT * FROM usuarios");
 
             while (rs.next()) {
                 listaUsuarios.add(new UsuarioOB(
@@ -181,6 +184,7 @@ public class SQL {
         return listaUsuarios;
     }
 
+    //devuelve una lista con todos los roles
     public static ArrayList<RolOB> getRoles() {
         ArrayList<RolOB> listaRoles = new ArrayList<>();
         String url = "jdbc:mysql://localhost:3306/trabajo_sge";
@@ -191,7 +195,7 @@ public class SQL {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conexion = DriverManager.getConnection(url, user, password);
             Statement st = conexion.createStatement();
-            ResultSet rs = st.executeQuery("SELECT id, nombre, descripcion FROM roles");
+            ResultSet rs = st.executeQuery("SELECT * FROM roles");
 
             while (rs.next()) {
                 listaRoles.add(new RolOB(
