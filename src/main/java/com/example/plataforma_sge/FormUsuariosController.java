@@ -24,12 +24,14 @@ public class FormUsuariosController {
 
     private UsuarioOB usuario;
 
+    //inicializa cargando los nombres de los roles y añadiendo datos a los combobox
     @FXML
     public void initialize() {
         cargarRoles();
         cbEstado.getItems().addAll("activo", "inactivo");
     }
 
+    //Recibe un objeto UsuarioOB y configura el formulario según si se va a crear un usuario nuevo o editar uno existente.
     public void setUsuario(UsuarioOB usuario) {
         this.usuario = usuario;
 
@@ -59,18 +61,16 @@ public class FormUsuariosController {
         }
     }
 
+    //funcionalidad botón guardar
     @FXML
     public void guardar() {
-        if (tfNombre.getText().isEmpty() ||
-                tfApellidos.getText().isEmpty() ||
-                tfUsuario.getText().isEmpty() ||
-                tfContra.getText().isEmpty() ||
-                cbRol.getValue() == null) {
-
+        //comprueba que no hayan campos vacíos
+        if (tfNombre.getText().isEmpty() || tfApellidos.getText().isEmpty() || tfUsuario.getText().isEmpty() || tfContra.getText().isEmpty() || cbRol.getValue() == null) {
             mostrarAlerta("Rellena todos los campos");
             return;
         }
 
+        //guarda los datos
         String nombre = tfNombre.getText();
         String apellidos = tfApellidos.getText();
         String usuarioTxt = tfUsuario.getText();
@@ -85,7 +85,7 @@ public class FormUsuariosController {
 
 
         if (usuario == null) {
-            // INSERT
+            // INSERT en el SQL
             String sql = "INSERT INTO usuarios (nombre, apellidos, usuario, contraseña, rol_id) VALUES (" +
                     "'" + nombre + "', " +
                     "'" + apellidos + "', " +
@@ -95,7 +95,7 @@ public class FormUsuariosController {
             AuditoriaOB.pasarAuditoriaAMongo("Crear usuario");
             SQL.vacio(sql);
         } else {
-            // UPDATE
+            // UPDATE en el SQL
             String sql = "UPDATE usuarios SET " +
                     "nombre='" + nombre + "', " +
                     "apellidos='" + apellidos + "', " +
@@ -105,25 +105,28 @@ public class FormUsuariosController {
             AuditoriaOB.pasarAuditoriaAMongo("Editar usuario");
             SQL.vacio(sql);
         }
-
         cerrar();
     }
 
+    //funcionalidad botón cancelar
     @FXML
     public void cancelar() {
         cerrar();
     }
 
+    //método que no guarda los datos solo cierra la ventana
     private void cerrar() {
         Stage stage = (Stage) tfNombre.getScene().getWindow();
         stage.close();
     }
 
+    //carga los nombres de los roles de combobox del rol
     public void cargarRoles() {
         cbRol.getItems().clear();
         cbRol.getItems().addAll(SQL.getRoles());
     }
 
+    //para mostrar alerta con el mensaje seleccionado
     private void mostrarAlerta(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING, mensaje);
         alert.showAndWait();
