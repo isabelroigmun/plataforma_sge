@@ -9,12 +9,13 @@ import javafx.scene.control.Label;
 
 public class InicioController {
     @FXML
-    private Label txtUsuario;
+    private Label txtUsuario; //texto bienvenida al usuario
     @FXML
-    private PieChart pieChart;
+    private PieChart pieChart; //gráfico circular
     @FXML
-    private BarChart<String,Integer> barChart;
+    private BarChart<String,Integer> barChart; //gráfico de barras
 
+    //inicializa cargando todos los proyectos de la base de datos, cargando el nombre del usuario y los gráficos con los datos actualizados
     @FXML
     public void initialize() {
         SQL.sacar_proyectos("SELECT * FROM proyectos");
@@ -23,10 +24,12 @@ public class InicioController {
         cargarBarChart();
     }
 
+    //muestra mensaje de bienvenida al usuario
     public void cargarUsuario() {
         txtUsuario.setText("Hola " + SQL.usuario);
     }
 
+    //carga el gráfico circular con los proyectos activos e inactivos que hay
     public void cargarPieChart() {
         pieChart.getData().clear();
         pieChart.setData(FXCollections.observableArrayList(
@@ -35,6 +38,7 @@ public class InicioController {
         ));
     }
 
+    //carga el gráfico de barras con los proyectos por tipo que hay
     public void cargarBarChart() {
         barChart.getData().clear();
         XYChart.Series<String, Integer> serie = new XYChart.Series<>();
@@ -47,6 +51,7 @@ public class InicioController {
         barChart.getData().add(serie);
     }
 
+    //método para obtener el número de proyectos activos
     public int obtenerProyectosActivos(){
         int activos =0;
         for (ProyectoOB p : SQL.listaProyectos){
@@ -56,7 +61,7 @@ public class InicioController {
         }
         return activos;
     }
-
+    //método para obtener el número de proyectos inactivos
     public int obtenerProyectosInactivos(){
         int inactivos =0;
         for (ProyectoOB p : SQL.listaProyectos){
@@ -67,6 +72,7 @@ public class InicioController {
         return inactivos;
     }
 
+    //cuenta cuántos proyectos por tipo hay
     public int contarTipo(String tipo){
         int contador=0;
         for (ProyectoOB p : SQL.listaProyectos) {
