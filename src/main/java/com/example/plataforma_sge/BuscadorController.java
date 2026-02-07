@@ -54,12 +54,13 @@ public class BuscadorController implements Initializable {
         stage.setScene(new Scene(root));
     }
 
-
+    //este método obtiene el texto que hay en el textfield del buscador y, si está vacío muestra una alerta y sino busca por palabras clave, después actualilza la lista con los elementos que cumplan la condición
     public void buscar(){
         String texto = tfBuscador.getText().trim();
 
         if (texto.isEmpty()){
             mostrarAlerta("Introduce algo en el campo de búsqueda");
+            return;
         } else {
             SQL.sacar_proyectos("SELECT * FROM proyectos WHERE key_words LIKE '%" + texto + "%'");
         }
@@ -71,6 +72,7 @@ public class BuscadorController implements Initializable {
         tableProyectos.setItems(datos);
     }
 
+    //inicializa la tabla dándole el tamaño total de la ventana
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
@@ -83,6 +85,7 @@ public class BuscadorController implements Initializable {
         boss.setCellValueFactory(new PropertyValueFactory<>("jefeId"));
     }
 
+    //método para mostrar alerta
     public void mostrarAlerta(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING, mensaje);
         alert.showAndWait();
