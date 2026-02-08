@@ -19,11 +19,13 @@ import java.time.ZoneId;
 import java.util.Date;
 import java.util.ResourceBundle;
 
+//Clase controladora de la interfaz gráfica de Auditoria
+
 public class AuditoriaController implements Initializable {
 
+    // Se inicializan todos los elementos FXML de la interfaz
      @FXML
      private TableView<AuditoriaOB> tabla_auditoria;
-
      @FXML
      private TableColumn<AuditoriaOB,String> id_mongo;
      @FXML
@@ -33,25 +35,29 @@ public class AuditoriaController implements Initializable {
      @FXML
      private TableColumn<AuditoriaOB, LocalDateTime> fecha;
 
+
+     //Configuración de las columnas de la tabla, llamando a la carga de los datos.
+
      public void tabla(){
-         final ObservableList<AuditoriaOB> datos = FXCollections.observableArrayList(); //poder sacar los movimientos ordenados
 
          id_mongo.setCellValueFactory(new PropertyValueFactory<AuditoriaOB, String>("mongoid"));
          accion.setCellValueFactory(new PropertyValueFactory<AuditoriaOB, String>("accion"));
          id_usuario.setCellValueFactory(new PropertyValueFactory<AuditoriaOB, Integer>("id_usuario"));
          fecha.setCellValueFactory(new PropertyValueFactory<AuditoriaOB, LocalDateTime>("fecha"));
-         tabla_auditoria.setItems(datos);
 
          cargarDatos();
      }
 
+     //Método que obtiene la colección creada en mongo para poder usarla en java,
+    //que recorre toda la colección 'auditoria' y la añade a la lista, para finalmente,
+    //configurar la tabla
     public void cargarDatos(){
         MongoCollection<Document> collection=
                 MongoDBConnection.getDatabase().getCollection("auditoria");
 
         ObservableList<AuditoriaOB> lista= FXCollections.observableArrayList();
 
-        try(MongoCursor<Document> cursor = collection.find().iterator()){ //DESLIZABLE PARA VER TODO EL CONTENIDO
+        try(MongoCursor<Document> cursor = collection.find().iterator()){
 
             while (cursor.hasNext()){
 
@@ -80,7 +86,9 @@ public class AuditoriaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+         //nada más se abra la interfaz gráfica, la tabla ocupará el espacio completo y se
+        //ejecutará el método tabla.
         tabla_auditoria.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
-         tabla();
+        tabla();
     }
 }

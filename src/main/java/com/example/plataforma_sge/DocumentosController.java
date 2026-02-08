@@ -22,7 +22,14 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 
+
+//Clase controladora de la interfaz gráfica de Documentos
+
+
 public class DocumentosController implements Initializable {
+
+
+    // Se inicializan todos los elementos FXML de la interfaz y algunas variables
 
     @FXML
     Label id;
@@ -59,15 +66,18 @@ public class DocumentosController implements Initializable {
     private PDFServicio servicio= new PDFServicio();
     private File selectedFile;
 
+    //Configura el id seleccionado desde proyectos y ejecuta su carga
     public void setid_proyecto(int id_proyecto){
         this.id_proyecto=id_proyecto;
         cargarPDF();
     }
 
+    //Busca los documentos con el id del proyecto y los muestra en el ListView
     private void cargarPDF() {
         documentos.getItems().setAll(servicio.doc_proyecto(id_proyecto));
     }
 
+    //Si se detecta un doble click en el ListView, se manda a crear un archivo temporal y ser abierto.
     public void doubleClick(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
         if (mouseEvent.getClickCount()==2){
             String sel= (String) documentos.getSelectionModel().getSelectedItem();
@@ -76,7 +86,8 @@ public class DocumentosController implements Initializable {
     }
 
 
-
+    //Se abre el explorador de archivos para seleccionar el pdf deseado y
+    // se manda subir a Mongo con el id del proyecto
     public void updateDocumentos(){
         JFileChooser selector = new JFileChooser();
         selector.setDialogTitle("Selecciona el archivo a enviar");
@@ -99,6 +110,7 @@ public class DocumentosController implements Initializable {
 
     }
 
+    //Coge el proyecto seleccionado previamente e imprime sus atributos por completo.
     public void setProyecto(ProyectoOB proyecto) {
         this.proyecto = proyecto;
         if (proyecto != null) {
@@ -117,6 +129,7 @@ public class DocumentosController implements Initializable {
         }
     }
 
+    //Se configura el cambio de interfaz a la de proyectos
     public void volver() throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("proyectos.fxml"));
         Parent root= loader.load();
@@ -125,6 +138,7 @@ public class DocumentosController implements Initializable {
         stage.setScene(new Scene(root));
     }
 
+    //Se configura el cambio de interfaz a la de buscador
     public void volver_buscador() throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("buscador.fxml"));
         Parent root= loader.load();

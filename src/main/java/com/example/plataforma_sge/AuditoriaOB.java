@@ -8,7 +8,14 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+
+//Objeto que representa un registro de una auditoria.
+//Contiene la información necesaria tanto para crear el registro, como para mostrar
+//los datos en la tabla.
+
+
 public class AuditoriaOB {
+
 
     private final String mongoid;
     private final String accion;
@@ -41,6 +48,10 @@ public class AuditoriaOB {
     public LocalDateTime getFecha() {
         return fecha;
     }
+
+    //Registra todas las acciones en la colección 'auditoria' de Mongo
+    //Se almacena tanto la acción, como el id del usuario y la fecha. El id
+    //de la acción lo asigna automáticamente mongo
 
     public static void pasarAuditoriaAMongo(String accion) {
 

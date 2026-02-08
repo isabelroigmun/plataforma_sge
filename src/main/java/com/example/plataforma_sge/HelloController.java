@@ -11,8 +11,13 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+//Clase controladora de la interfaz gráfica del inicio de sesión.
 
 public class HelloController {
+
+    // Se inicializan todos los elementos FXML de la interfaz
+
+
     @FXML
     private Label estado;
 
@@ -21,6 +26,9 @@ public class HelloController {
 
     @FXML
     private PasswordField password;
+
+    //Encargado de verificar las credenciales introducidad, en caso correcto,
+    //ejecuta cambio de escena, si no, se indica que la relación es incorrecta.
 
     @FXML
     protected void signin() throws IOException {
@@ -39,6 +47,8 @@ public class HelloController {
         }
 
     }
+
+    //Se configura el cambio de interfaz a la de dashboard
 
     private void cambiarEscena() throws IOException {
 

@@ -4,6 +4,11 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
 
+
+//Objeto que representa los proyectos creados por los usuarios,
+//con sus correspondientes atributos para después poder ser visualizado
+
+
 public class ProyectoOB {
 
     private int codigo;

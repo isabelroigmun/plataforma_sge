@@ -1,5 +1,10 @@
 package com.example.plataforma_sge;
 
+
+//Objeto que representa los documentos que se suben en cada proyecto,
+//con su id de proyecto, nombre del archivo, y fecha de subida
+
+
 public class DocumentoOB {
 
     private int id;

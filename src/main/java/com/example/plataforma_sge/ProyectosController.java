@@ -19,7 +19,12 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+
+//Clase controladora de la interfaz gráfica de Auditoria
+
 public class ProyectosController implements Initializable {
+
+    // Se inicializan todos los elementos FXML de la interfaz
 
 
     @FXML
@@ -42,6 +47,8 @@ public class ProyectosController implements Initializable {
     Button crear;
 
 
+    //Configuración de las columnas de la tabla y sus datos, recorriendo toda la tabla
+    // y guardando los objetos en una lista, para finalmente, visualizarlos estos datos en la tabla.
 
     public void tabla(){
         SQL.sacar_proyectos("SELECT * FROM PROYECTOS");
@@ -59,6 +66,18 @@ public class ProyectosController implements Initializable {
 
     }
 
+    //Si se detecta un doble click en uno de los proyectos de la tabla, se manda ese proyecto a abrir el
+    //apartado de documentos.
+
+    public void doubleClick(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
+        if (mouseEvent.getClickCount()==2){
+            ProyectoOB sel= (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
+            abrirDocumentos(sel);
+        }
+    }
+
+    //Se configura el cambio de interfaz a la de documentos
+
     public void abrirDocumentos(ProyectoOB p) throws IOException {
         FXMLLoader loader= new FXMLLoader(getClass().getResource("documentos.fxml"));
         Parent root= loader.load();
@@ -74,6 +93,9 @@ public class ProyectosController implements Initializable {
 
     }
 
+    //Se comprueba que el usuario tenga permisos para ejecutar la acción,
+    //en este caso, eliminar proyectos
+
     public void borrar(){
         ProyectoOB sel= (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
 
@@ -84,11 +106,18 @@ public class ProyectosController implements Initializable {
 
     }
 
+    //Se comprueba que el usuario tenga permisos para ejecutar la acción,
+    //en este caso, crear proyectos, abriendo así un formulario para ello.
+    //Por último, vuelve a ejecutar el método tabla para actualizarla.
     public void crear(){
         abrirFormulario(null);
         tabla();
     }
 
+    //Se comprueba que el usuario tenga permisos para ejecutar la acción,
+    //en este caso, editar proyectos, abriendo así un formulario para ello,
+    //con la información de este ya aplicada a cada uno de los apartados del formulario.
+    //Por último, vuelve a ejecutar el método tabla para actualizarla.
     public void editar(){
         ProyectoOB seleccionado = (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
         if (seleccionado==null){
@@ -97,6 +126,8 @@ public class ProyectosController implements Initializable {
         abrirFormulario(seleccionado);
         tabla();
     }
+
+    //Se configura y se abre una nueva interfaz, en este caso el formulario.
 
     public void abrirFormulario(ProyectoOB p){
         try {
@@ -124,14 +155,12 @@ public class ProyectosController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        //nada más se abra la interfaz gráfica, la tabla ocupará el espacio completo y se
+        //ejecutará el método tabla.
+
         tableProyectos.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);//columnas del tamaño de la ventana
         tabla();
     }
 
-    public void doubleClick(javafx.scene.input.MouseEvent mouseEvent) throws IOException {
-        if (mouseEvent.getClickCount()==2){
-            ProyectoOB sel= (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
-            abrirDocumentos(sel);
-        }
-    }
+
 }

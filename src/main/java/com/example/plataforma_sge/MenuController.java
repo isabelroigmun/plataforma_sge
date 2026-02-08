@@ -13,10 +13,19 @@ import javafx.scene.control.MenuBar;
 import java.awt.*;
 import java.io.IOException;
 
+//Clase controladora de la interfaz gráfica del menú
+
+
 public class MenuController {
+
+    // Se inicializan todos los elementos FXML de la interfaz
 
     @FXML
     ToolBar TolBar;
+
+
+    //Se configura el cambio de interfaz a la de auditoria con la condición de que
+    //el usuario tenga el rol de admin, si no, saldrá una alerta de error.
 
     public void change_auditoria() throws IOException {
 
@@ -42,6 +51,8 @@ public class MenuController {
         }
     }
 
+    //Se configura el cambio de interfaz a la de proyectos
+
     public void change_proyectos() throws IOException {
 
         FXMLLoader loader= new FXMLLoader(getClass().getResource("proyectos.fxml"));
@@ -52,6 +63,9 @@ public class MenuController {
 
     }
 
+
+    //Se configura el cambio de interfaz a la de buscador
+
     public void change_buscador() throws IOException {
 
         FXMLLoader loader= new FXMLLoader(getClass().getResource("buscador.fxml"));
@@ -61,6 +75,10 @@ public class MenuController {
         stage.setScene(new Scene(root));
 
     }
+
+
+    //Se configura el cambio de interfaz a la de usuarios con la condición de que
+    //el usuario tenga el rol de admin, si no, saldrá una alerta de error.
 
     public void change_usuarios() throws IOException {
         SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");

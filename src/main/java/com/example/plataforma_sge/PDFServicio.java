@@ -39,8 +39,6 @@ public class PDFServicio {
         for (GridFSFile file : files) {
             pdfs.add(file.getFilename());
         }
-
-
         return pdfs;
     }
 
