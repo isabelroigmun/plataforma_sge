@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -60,6 +61,11 @@ public class UsuariosController implements Initializable {
     public void borrar(){
         UsuarioOB sel= (UsuarioOB) tableUsuarios.getSelectionModel().getSelectedItem();
 
+        if (sel==null){
+            mostrarAlerta("Selecciona un proyecto para poder borrarlo");
+            return;
+        }
+
         int idSel= sel.getId();
         SQL.vacio("DELETE FROM usuarios where id= "+idSel);
         tabla();
@@ -76,6 +82,7 @@ public class UsuariosController implements Initializable {
     public void editar(){
         UsuarioOB seleccionado = (UsuarioOB) tableUsuarios.getSelectionModel().getSelectedItem();
         if (seleccionado==null){
+            mostrarAlerta("Selecciona un proyecto para poder editarlo");
             return;
         }
         abrirFormulario(seleccionado);
@@ -111,5 +118,10 @@ public class UsuariosController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableUsuarios.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);//columnas del tamaño de la ventana
         tabla();
+    }
+
+    public void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING, mensaje);
+        alert.showAndWait();
     }
 }

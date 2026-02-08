@@ -89,6 +89,11 @@ public class ProyectosController implements Initializable {
     public void borrar(){
         ProyectoOB sel= (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
 
+        if (sel==null){
+            mostrarAlerta("Selecciona un proyecto para poder borrarlo");
+            return;
+        }
+
         int idSel= sel.getCodigo();
         SQL.vacio("DELETE FROM proyectos where id= "+idSel);
         tabla();
