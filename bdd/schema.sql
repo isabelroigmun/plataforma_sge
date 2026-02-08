@@ -30,5 +30,6 @@ CREATE TABLE proyectos (
   en_cooperacion boolean,
   fases integer,
   usuarios_id INT,
+  key_words VARCHAR(50),
   FOREIGN KEY (usuarios_id) REFERENCES usuarios(id)
 );

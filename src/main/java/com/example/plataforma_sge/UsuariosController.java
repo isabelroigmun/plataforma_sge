@@ -19,6 +19,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class UsuariosController implements Initializable {
+    //tabla y columnas
     @FXML
     TableView<UsuarioOB> tableUsuarios;
     @FXML
@@ -29,6 +30,8 @@ public class UsuariosController implements Initializable {
     TableColumn<UsuarioOB, String> usuario;
     @FXML
     TableColumn<UsuarioOB, Integer> rol;
+
+    //botones
     @FXML
     Button editar;
     @FXML
@@ -36,6 +39,7 @@ public class UsuariosController implements Initializable {
     @FXML
     Button crear;
 
+    //carga los usuarios desde la base de datos y los muestra en la tabla
     public void tabla(){
         SQL.sacar_usuarios("SELECT * FROM USUARIOS");
         final ObservableList<UsuarioOB> datos = FXCollections.observableArrayList();
@@ -52,6 +56,7 @@ public class UsuariosController implements Initializable {
         tableUsuarios.setItems(datos);
     }
 
+    //método para borrar el usuario seleccionado en la tabla
     public void borrar(){
         UsuarioOB sel= (UsuarioOB) tableUsuarios.getSelectionModel().getSelectedItem();
 
@@ -61,11 +66,13 @@ public class UsuariosController implements Initializable {
         AuditoriaOB.pasarAuditoriaAMongo("Borrar usuario");
     }
 
+    //abre el form para crear un nuevo usuario
     public void crear(){
         abrirFormulario(null);
         tabla();
     }
 
+    //abre el form para editar un usuario existente, le pasa sus datos
     public void editar(){
         UsuarioOB seleccionado = (UsuarioOB) tableUsuarios.getSelectionModel().getSelectedItem();
         if (seleccionado==null){
@@ -75,6 +82,7 @@ public class UsuariosController implements Initializable {
         tabla();
     }
 
+    //abre el formulario de creación/edición de usuarios en una ventana modal
     public void abrirFormulario(UsuarioOB u){
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("form-usuario.fxml"));
@@ -98,6 +106,7 @@ public class UsuariosController implements Initializable {
         }
     }
 
+    //inicializa ajustando el tamaño de las ventanas y cargando la tabla con los datos iniciales
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         tableUsuarios.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);//columnas del tamaño de la ventana
