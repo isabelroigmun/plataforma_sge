@@ -87,17 +87,24 @@ public class ProyectosController implements Initializable {
     //Se comprueba que el usuario tenga permisos para ejecutar la acción,
     //en este caso, eliminar proyectos
     public void borrar(){
-        ProyectoOB sel= (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
+        SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");
+        int rol= SQL.id_rol;
 
-        if (sel==null){
-            mostrarAlerta("Selecciona un proyecto para poder borrarlo");
-            return;
+        if (rol==1 | rol==3) {
+            ProyectoOB sel = (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
+
+            if (sel == null) {
+                mostrarAlerta("Selecciona un proyecto para poder borrarlo");
+                return;
+            }
+
+            int idSel = sel.getCodigo();
+            SQL.vacio("DELETE FROM proyectos where id= " + idSel);
+            tabla();
+            AuditoriaOB.pasarAuditoriaAMongo("Borrar proyecto");
+        } else{
+            mostrarAlerta("Permisos insuficientes");
         }
-
-        int idSel= sel.getCodigo();
-        SQL.vacio("DELETE FROM proyectos where id= "+idSel);
-        tabla();
-        AuditoriaOB.pasarAuditoriaAMongo("Borrar proyecto");
 
     }
 
@@ -106,8 +113,15 @@ public class ProyectosController implements Initializable {
     //Por último, vuelve a ejecutar el método tabla para actualizarla.
 
     public void crear(){
-        abrirFormulario(null);
-        tabla();
+        SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");
+        int rol= SQL.id_rol;
+
+        if (rol==1 | rol==3) {
+            abrirFormulario(null);
+            tabla();
+        }else {
+            mostrarAlerta("Permisos insuficientes");
+        }
     }
 
 
@@ -117,13 +131,20 @@ public class ProyectosController implements Initializable {
     //Por último, vuelve a ejecutar el método tabla para actualizarla.
 
     public void editar(){
-        ProyectoOB seleccionado = (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
-        if (seleccionado==null){
-            mostrarAlerta("Selecciona un proyecto para poder editarlo");
-            return;
+        SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");
+        int rol= SQL.id_rol;
+
+        if (rol==1 | rol==3) {
+            ProyectoOB seleccionado = (ProyectoOB) tableProyectos.getSelectionModel().getSelectedItem();
+            if (seleccionado == null) {
+                mostrarAlerta("Selecciona un proyecto para poder editarlo");
+                return;
+            }
+            abrirFormulario(seleccionado);
+            tabla();
+        }else {
+            mostrarAlerta("Permisos insuficientes");
         }
-        abrirFormulario(seleccionado);
-        tabla();
     }
 
     //Se configura y se abre una nueva interfaz, en este caso el formulario.
