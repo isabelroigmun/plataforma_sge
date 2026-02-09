@@ -30,7 +30,6 @@ public class MenuController {
     public void change_auditoria() throws IOException {
 
         SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");
-
         int rol= SQL.id_rol;
         System.out.println(rol);
 
@@ -82,7 +81,6 @@ public class MenuController {
 
     public void change_usuarios() throws IOException {
         SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");
-
         int rol= SQL.id_rol;
         System.out.println(rol);
 

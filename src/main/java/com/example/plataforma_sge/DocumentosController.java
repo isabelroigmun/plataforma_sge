@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -95,19 +96,26 @@ public class DocumentosController implements Initializable {
     //Se abre el explorador de archivos para seleccionar el pdf deseado y
     // se manda subir a Mongo con el id del proyecto
     public void updateDocumentos(){
-        JFileChooser selector = new JFileChooser();
-        selector.setDialogTitle("Selecciona el archivo a enviar");
-        FileNameExtensionFilter filtro = new FileNameExtensionFilter("ARCHIVOS PDF", "pdf");
-        selector.setFileFilter(filtro);
+        SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");
+        int rol= SQL.id_rol;
 
-        int resultado = selector.showOpenDialog(null);
+        if (rol==1 | rol==3) {
+            JFileChooser selector = new JFileChooser();
+            selector.setDialogTitle("Selecciona el archivo a enviar");
+            FileNameExtensionFilter filtro = new FileNameExtensionFilter("ARCHIVOS PDF", "pdf");
+            selector.setFileFilter(filtro);
 
-        if (resultado == JFileChooser.APPROVE_OPTION) {
-            File archivo_seleccionado = selector.getSelectedFile();
-            servicio.addpdf(id_proyecto,archivo_seleccionado);
-            cargarPDF();
+            int resultado = selector.showOpenDialog(null);
+
+            if (resultado == JFileChooser.APPROVE_OPTION) {
+                File archivo_seleccionado = selector.getSelectedFile();
+                servicio.addpdf(id_proyecto, archivo_seleccionado);
+                cargarPDF();
+            }
+            AuditoriaOB.pasarAuditoriaAMongo("Documento subido");
+        }else {
+            mostrarAlerta("Permisos insuficientes");
         }
-
     }
 
 
@@ -151,5 +159,10 @@ public class DocumentosController implements Initializable {
 
         Stage stage= (Stage) id.getScene().getWindow();
         stage.setScene(new Scene(root));
+    }
+
+    public void mostrarAlerta(String mensaje) {
+        Alert alert = new Alert(Alert.AlertType.WARNING, mensaje);
+        alert.showAndWait();
     }
 }
