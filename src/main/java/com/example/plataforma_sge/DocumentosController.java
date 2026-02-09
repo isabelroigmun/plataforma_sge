@@ -101,7 +101,7 @@ public class DocumentosController implements Initializable {
             servicio.addpdf(id_proyecto,archivo_seleccionado);
             cargarPDF();
         }
-
+        AuditoriaOB.pasarAuditoriaAMongo("Documento subido");
     }
 
 
