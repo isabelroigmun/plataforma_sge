@@ -86,6 +86,12 @@ public class DocumentosController implements Initializable {
         }
     }
 
+    public void eliminar_documentos(){
+        String sel= (String) documentos.getSelectionModel().getSelectedItem();
+        servicio.deletepdf(id_proyecto,sel);
+        cargarPDF();
+    }
+
 
     //Se abre el explorador de archivos para seleccionar el pdf deseado y
     // se manda subir a Mongo con el id del proyecto

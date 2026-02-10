@@ -7,9 +7,13 @@ import com.mongodb.client.gridfs.GridFSBuckets;
 import com.mongodb.client.gridfs.GridFSFindIterable;
 import com.mongodb.client.gridfs.model.GridFSFile;
 import com.mongodb.client.gridfs.model.GridFSUploadOptions;
+import com.mongodb.client.model.Filters;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.Alert;
 import org.bson.Document;
+import org.bson.conversions.Bson;
+import org.bson.types.ObjectId;
 
 import java.awt.*;
 import java.io.File;
@@ -19,9 +23,9 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
+import java.util.logging.Filter;
 
 public class PDFServicio {
     MongoDatabase database = MongoDBConnection.getDatabase();
@@ -69,6 +73,40 @@ public class PDFServicio {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+
+    }
+
+    public void deletepdf(int id_proyecto, String nombreArchivo){
+        GridFSBucket gfsb= GridFSBuckets.create(database);
+
+        Bson filtro = Filters.and(
+                Filters.eq("filename", nombreArchivo),
+                Filters.eq("metadata.id_proyecto", id_proyecto)
+        );
+
+        GridFSFile file = gfsb.find(filtro).first();
+
+        if (file!=null){
+            ObjectId idMongo= file.getObjectId();
+            gfsb.delete(idMongo);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Borrado con éxito!");
+            alert.setHeaderText("m");
+            alert.setContentText("");
+
+            alert.showAndWait();
+        }else {
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Borrado con éxito!");
+            alert.setHeaderText("m");
+            alert.setContentText("");
+
+            alert.showAndWait();
+
+        }
+
 
     }
 
