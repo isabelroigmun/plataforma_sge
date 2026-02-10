@@ -87,7 +87,7 @@ public class DocumentosController implements Initializable {
     }
 
     //Si se llega a pulsar el botón "Eliminar archivo", se comprueban sus permisos y se obtiene el documento
-    //pasandolo al método de eliminación y recargando la lista junto a la auditoria.
+    //pasandolo al método de eliminación y recargando la lista junto a la auditoría.
     public void eliminar_documentos(){
         SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");
         int rol= SQL.id_rol;
@@ -172,6 +172,8 @@ public class DocumentosController implements Initializable {
         stage.setScene(new Scene(root));
     }
 
+    //Encargado de mostrar las alertas de toda esta clase con el mensaje indicado
+    //en cada caso.
     public void mostrarAlerta(String mensaje) {
         Alert alert = new Alert(Alert.AlertType.WARNING, mensaje);
         alert.showAndWait();
