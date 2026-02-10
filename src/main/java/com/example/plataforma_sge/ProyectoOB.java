@@ -22,7 +22,7 @@ public class ProyectoOB {
     private boolean bajadaCalificacion; //falso por defecto
     private boolean enCooperacion;
     private int fases;
-    private int jefeId; //PROVISIONAL (?)
+    private int jefeId;
     private String palabrasClave;
 
     public ProyectoOB(int codigo, String nombre, LocalDateTime fechaCreacion, LocalDate fechaEjInicio, LocalDate fechaEjFinal, String tipo, String estado, String calificacion, boolean bajadaCalificacion, boolean enCooperacion, int fases, int jefeId, String palabrasClave) {
