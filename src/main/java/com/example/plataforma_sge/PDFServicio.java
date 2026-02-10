@@ -34,7 +34,7 @@ public class PDFServicio {
 
 
     //Encargada de buscar los documentos que contengan en los metadatados el id
-    //del proyecto seleccionado.
+    //del proyecto seleccionado
     public List<String> doc_proyecto(int id_proyecto){
 
         GridFSBucket gridFSBucket = GridFSBuckets.create(database);

@@ -30,7 +30,7 @@ import java.util.ResourceBundle;
 public class DocumentosController implements Initializable {
 
 
-    // Se inicializan todos los elementos FXML de la interfaz y algunas variables
+    // Se inicializan todos los elementos FXML de la interfaz y algunas variables.
 
     @FXML
     Label id;
