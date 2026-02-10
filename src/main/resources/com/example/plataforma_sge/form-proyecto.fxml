@@ -40,8 +40,8 @@
          <children>
             <Label text="Código:" />
             <Label text="Nombre:" GridPane.rowIndex="1" />
-            <Label text="Fecha creación:" GridPane.rowIndex="2" />
-            <Label text="Fecha ejecución:" GridPane.rowIndex="3" />
+            <Label text="Fecha ej inicio:" GridPane.rowIndex="2" />
+            <Label text="Fecha ej final:" GridPane.rowIndex="3" />
             <Label text="Tipo proyecto:" GridPane.rowIndex="4" />
             <Label text="Estado:" GridPane.rowIndex="5" />
             <Label text="Calificación:" GridPane.rowIndex="6" />
@@ -53,8 +53,8 @@
 
              <TextField fx:id="tfCodigo" GridPane.columnIndex="1" />
              <TextField fx:id="tfNombre" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-             <DatePicker fx:id="dpCreacion" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-             <DatePicker fx:id="dpEjecucion" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+             <DatePicker fx:id="dpEjInicio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+             <DatePicker fx:id="dpEjFinal" GridPane.columnIndex="1" GridPane.rowIndex="3" />
              <ComboBox fx:id="cbTipoProyecto" GridPane.columnIndex="1" GridPane.rowIndex="4" />
              <ComboBox fx:id="cbEstado" GridPane.columnIndex="1" GridPane.rowIndex="5" />
              <ComboBox fx:id="cbCalificacion" GridPane.columnIndex="1" GridPane.rowIndex="6" />

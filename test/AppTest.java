@@ -55,12 +55,13 @@ public class AppTest {
     void testComprobarFechaValida() {
         FormProyectosController controller = new FormProyectosController();
 
-        LocalDate creacion = LocalDate.of(2026, 2, 10);
-        LocalDate ejecucionValida = LocalDate.of(2026, 2, 12);
-        LocalDate ejecucionInvalida = LocalDate.of(2026, 2, 8);
+        LocalDate inicio = LocalDate.of(2026, 2, 10);
+        LocalDate finValido = LocalDate.of(2026, 2, 12);
+        LocalDate finInvalido = LocalDate.of(2026, 2, 8);
 
-        assertTrue(controller.comprobarFechaValida(ejecucionInvalida, creacion));
-        assertFalse(controller.comprobarFechaValida(ejecucionValida, creacion));
+        assertTrue(controller.comprobarFechaValida(inicio, finInvalido));
+        assertFalse(controller.comprobarFechaValida(inicio, finValido));
     }
+
 
 }

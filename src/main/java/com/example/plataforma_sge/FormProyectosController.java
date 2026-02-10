@@ -1,17 +1,12 @@
 package com.example.plataforma_sge;
 
-import com.mongodb.client.MongoCollection;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import org.bson.Document;
-
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
-import java.util.Date;
 
 public class FormProyectosController {
     @FXML
@@ -21,9 +16,9 @@ public class FormProyectosController {
     @FXML
     TextField tfNombre;
     @FXML
-    DatePicker dpCreacion;
+    DatePicker dpEjInicio;
     @FXML
-    DatePicker dpEjecucion;
+    DatePicker dpEjFinal;
     @FXML
     ComboBox<String> cbTipoProyecto; //ENUM("IT","I+D","I+D+i","I+D+IT")
     @FXML
@@ -64,9 +59,8 @@ public class FormProyectosController {
             tfCodigo.setText(String.valueOf(proyecto.getCodigo()));
             tfCodigo.setDisable(true);
             tfNombre.setText(proyecto.getNombre());
-            dpCreacion.setValue(proyecto.getFechaCreacion().toLocalDate());
-            dpCreacion.setDisable(true);
-            dpEjecucion.setValue(proyecto.getFechaEjInicio());
+            dpEjInicio.setValue(proyecto.getFechaEjInicio());
+            dpEjFinal.setValue(proyecto.getFechaEjFinal());
             cbTipoProyecto.setValue(proyecto.getTipo());
             cbEstado.setValue(proyecto.getEstado());
             cbCalificacion.setValue(proyecto.getCalificacion());
@@ -86,9 +80,8 @@ public class FormProyectosController {
             tfCodigo.setText("");
             tfCodigo.setDisable(true);
             tfNombre.setText("");
-            dpCreacion.setValue(LocalDate.now());
-            dpCreacion.setDisable(true);
-            dpEjecucion.setValue(LocalDate.now());
+            dpEjInicio.setValue(LocalDate.now());
+            dpEjFinal.setValue(LocalDate.now());
             cbTipoProyecto.setValue(null);
             cbEstado.setValue(null);
             cbCalificacion.setValue(null);
@@ -111,7 +104,7 @@ public class FormProyectosController {
                 return;
             }
 
-            if (dpEjecucion.getValue()==null){
+            if (dpEjFinal.getValue()==null){
                 mostrarAlerta("Selecciona una fecha de ejecución");
                 return;
             }
@@ -132,16 +125,21 @@ public class FormProyectosController {
                 return;
             }
 
-            if (comprobarFechaValida(dpEjecucion.getValue(),dpCreacion.getValue())){
-                mostrarAlerta("La fecha de ejecución debe ser posterior a la fecha de creación");
+            if (comprobarFechaValida(dpEjInicio.getValue(), dpEjFinal.getValue())){
+                mostrarAlerta("La fecha de ejecución inicio debe ser anterior a la fecha de ejecución final");
                 return;
             }
 
             //aquí guardará los datos en variables para luego insertarlos/actualizarlos en el SQL
             String nombre = tfNombre.getText();
-            LocalDateTime fechaCreacion = LocalDateTime.now();
-            LocalDate fechaEjInicio = dpEjecucion.getValue();
-            LocalDate fechaEjFinal = null;
+            LocalDateTime fechaCreacion;
+            if (proyecto == null) {
+                fechaCreacion = LocalDateTime.now();
+            } else {
+                fechaCreacion = proyecto.getFechaCreacion();
+            }
+            LocalDate fechaEjInicio = dpEjInicio.getValue();
+            LocalDate fechaEjFinal = dpEjFinal.getValue();
             String tipo = cbTipoProyecto.getValue();
             String calificacion = cbCalificacion.getValue();
             int activo = convertirEstado(cbEstado.getValue());
@@ -158,7 +156,7 @@ public class FormProyectosController {
                         "'" + nombre + "', " +
                         "'" + fechaCreacion + "', " +
                         "'" + fechaEjInicio + "', " +
-                        "NULL, " +
+                        "'" + fechaEjFinal + "', " +
                         "'" + tipo + "', " +
                         activo + ", " +
                         "'" + calificacion + "', " +
@@ -171,12 +169,10 @@ public class FormProyectosController {
                 SQL.vacio(sql);
             } else {
                 //UPDATE en el SQL
-                int codigo = proyecto.getCodigo();
-
-                String sql = "UPDATE proyectos SET " +
+                int codigo = proyecto.getCodigo();String sql = "UPDATE proyectos SET " +
                         "nombre='" + nombre + "', " +
                         "fecha_ej_inicio='" + fechaEjInicio + "', " +
-                        "fecha_ej_final=" + fechaEjFinal + ", " +
+                        "fecha_ej_final='" + fechaEjFinal + "', " +
                         "tipo_proyecto='" + tipo + "', " +
                         "activo=" + activo + ", " +
                         "calificacion='" + calificacion + "', " +
@@ -186,7 +182,6 @@ public class FormProyectosController {
                         "usuarios_id=" + jefeId + ", " +
                         "key_words='" + palabrasClave + "' " +
                         "WHERE id=" + codigo;
-
                 AuditoriaOB.pasarAuditoriaAMongo("Editar proyecto");
                 SQL.vacio(sql);
             }
@@ -234,8 +229,8 @@ public class FormProyectosController {
         }
     }
 
-    //comprueba que la fecha de ejecucion es posterior a la de creación
-    public boolean comprobarFechaValida(LocalDate ejecucion, LocalDate creacion) {
-        return ejecucion.isBefore(creacion);
+    //comprueba que la fecha de ejecucion inicio es anterior a la de ejecución final
+    public boolean comprobarFechaValida(LocalDate inicio, LocalDate fin) {
+        return fin.isBefore(inicio);
     }
 }
