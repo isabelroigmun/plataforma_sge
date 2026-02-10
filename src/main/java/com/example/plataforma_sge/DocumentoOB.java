@@ -17,6 +17,7 @@ public class DocumentoOB {
         this.fecha = fecha;
     }
 
+
     public int getId() {
         return id;
     }

@@ -86,10 +86,21 @@ public class DocumentosController implements Initializable {
         }
     }
 
+    //Si se llega a pulsar el botón "Eliminar archivo", se comprueban sus permisos y se obtiene el documento
+    //pasandolo al método de eliminación y recargando la lista junto a la auditoria.
     public void eliminar_documentos(){
-        String sel= (String) documentos.getSelectionModel().getSelectedItem();
-        servicio.deletepdf(id_proyecto,sel);
-        cargarPDF();
+        SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");
+        int rol= SQL.id_rol;
+
+        if (rol==1 | rol==3) {
+            String sel = (String) documentos.getSelectionModel().getSelectedItem();
+            servicio.deletepdf(id_proyecto, sel);
+            AuditoriaOB.pasarAuditoriaAMongo("Eliminar documento");
+            cargarPDF();
+        }else {
+            mostrarAlerta("Permisos insuficientes");
+        }
+
     }
 
 

@@ -28,10 +28,13 @@ import java.util.List;
 import java.util.logging.Filter;
 
 public class PDFServicio {
+
+    //Obtener la base de datos de Mongo desde la clase MongoDBConncection
     MongoDatabase database = MongoDBConnection.getDatabase();
-    MongoCollection<Document> docs= database.getCollection("fs.files");
 
 
+    //Encargada de buscar los documentos que contengan en los metadatados el id
+    //del proyecto seleccionado.
     public List<String> doc_proyecto(int id_proyecto){
 
         GridFSBucket gridFSBucket = GridFSBuckets.create(database);
@@ -46,6 +49,10 @@ public class PDFServicio {
         return pdfs;
     }
 
+
+    //Encargado de recibir el id del proyecto y el documento seleccionado por el
+    //usuario, para encapsularlo y subirlo a Mongo con el id del proyecto y la fecha
+    //de la operación
     public void addpdf(int id_proyecto, File pdfFile){
 
         try {
@@ -76,6 +83,9 @@ public class PDFServicio {
 
     }
 
+    //Recibe el nombre del archivo y el id del proyecto, creando con estos un filtro
+    //para obtener el id de ese documento y poder eliminarlo.
+
     public void deletepdf(int id_proyecto, String nombreArchivo){
         GridFSBucket gfsb= GridFSBuckets.create(database);
 
@@ -91,8 +101,8 @@ public class PDFServicio {
             gfsb.delete(idMongo);
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-            alert.setTitle("Borrado con éxito!");
-            alert.setHeaderText("m");
+            alert.setTitle("Archivo no encontrado");
+            alert.setHeaderText("Inténtelo de nuevo");
             alert.setContentText("");
 
             alert.showAndWait();
@@ -100,7 +110,7 @@ public class PDFServicio {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Borrado con éxito!");
-            alert.setHeaderText("m");
+            alert.setHeaderText("Borrado con éxito!");
             alert.setContentText("");
 
             alert.showAndWait();
@@ -110,13 +120,18 @@ public class PDFServicio {
 
     }
 
+
+    //Obtiene el nombre del documento seleccionado con un doble clic
+    //para así, crear un archivo temporal, descargarlo y poder visualizarlo.
+    //Tras su cierre, será eliminado.
+
     public void abrirVentanaDesdeMongo(String sel) {
 
         if (sel !=null){
 
             try {
 
-                GridFSBucket gridFSBucket= GridFSBuckets.create(MongoDBConnection.getDatabase());
+                GridFSBucket gridFSBucket= GridFSBuckets.create(database);
 
                 File tf= File.createTempFile("temp_app",".pdf");
                 tf.deleteOnExit();
