@@ -132,11 +132,10 @@ public class FormProyectosController {
                 return;
             }
 
-            if (dpEjecucion.getValue().isBefore(dpCreacion.getValue())){
+            if (comprobarFechaValida(dpEjecucion.getValue(),dpCreacion.getValue())){
                 mostrarAlerta("La fecha de ejecución debe ser posterior a la fecha de creación");
                 return;
             }
-
 
             //aquí guardará los datos en variables para luego insertarlos/actualizarlos en el SQL
             String nombre = tfNombre.getText();
@@ -145,12 +144,7 @@ public class FormProyectosController {
             LocalDate fechaEjFinal = null;
             String tipo = cbTipoProyecto.getValue();
             String calificacion = cbCalificacion.getValue();
-            int activo;
-            if (cbEstado.getValue().equals("activo")) {
-                activo = 1;
-            } else {
-                activo = 0;
-            }
+            int activo = convertirEstado(cbEstado.getValue());
             boolean bajadaCalificacion = cbBajadaCalificacion.getValue();
             boolean enCooperacion = cbCooperacion.getValue();
             int fases = Integer.parseInt(tfFases.getText());
@@ -210,6 +204,8 @@ public class FormProyectosController {
         }
     }
 
+
+
     //funcionalidad para el botón de cancelar
     @FXML
     public void cancelar() {
@@ -229,4 +225,17 @@ public class FormProyectosController {
         cbJefe.getItems().addAll(SQL.getUsuarios());
     }
 
+    //sirve para convertir el combo de estado de activo/inactivo a un entero para su inserción posterior en la bdd
+    public int convertirEstado(String estado){
+        if (estado.equalsIgnoreCase("activo")){
+            return 1;
+        }else {
+            return 0;
+        }
+    }
+
+    //comprueba que la fecha de ejecucion es posterior a la de creación
+    public boolean comprobarFechaValida(LocalDate ejecucion, LocalDate creacion) {
+        return ejecucion.isBefore(creacion);
+    }
 }

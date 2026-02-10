@@ -9,7 +9,7 @@ public class SQL {
 
     static String usuario;
     static String pass;
-    static ArrayList<ProyectoOB> listaProyectos;
+    public static ArrayList<ProyectoOB> listaProyectos;
     static ArrayList<UsuarioOB> listaUsuarios;
 
     static int id_rol;
