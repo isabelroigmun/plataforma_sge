@@ -39,10 +39,12 @@ public class HelloController {
         SQL.consulta("SELECT usuario,contraseña from usuarios where usuario='"+final_user+"' ");
 
         if (final_user.equals(SQL.usuario) && final_password.equals(SQL.pass)){
+            estado.setVisible(true);
             estado.setText("Relacion correcta, bienvenido");
             AuditoriaOB.pasarAuditoriaAMongo("Inicio de sesión");
             cambiarEscena();
         }else{
+            estado.setVisible(true);
             estado.setText("Relación incorrecta, inténtelo de nuevo.");
         }
 

@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.ProyectosController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="10" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.ProyectosController" stylesheets="@styles.css">
 
     <fx:include source="menu.fxml" />
 
-   <Label text="Proyectos Documentales">
+   <Label text="Proyectos Documentales" styleClass="titulo">
       <font>
          <Font size="25.0" />
       </font>
@@ -24,7 +24,7 @@
      </columns>
    </TableView>
 
-   <HBox prefHeight="100.0" prefWidth="200.0">
+   <HBox prefHeight="100.0" prefWidth="200.0" styleClass="buttons-container">
       <children>
          <Button fx:id="editar" mnemonicParsing="false" onAction="#editar" text="Editar" />
          <Button fx:id="borrar" mnemonicParsing="false" onAction="#borrar" text="Borrar" />

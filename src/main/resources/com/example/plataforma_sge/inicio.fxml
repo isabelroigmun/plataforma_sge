@@ -9,11 +9,11 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.InicioController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.InicioController" stylesheets="@styles.css">
     <fx:include source="menu.fxml" />
-    <Label text="Hola x" fx:id="txtUsuario"/>
-    <Label text="Resumen estadísticas" />
-    <HBox prefHeight="100.0" prefWidth="200.0">
+    <Label text="Hola x" fx:id="txtUsuario" styleClass="labelUsuario"/>
+    <Label text="Resumen estadísticas" styleClass="titulo" />
+    <HBox prefHeight="100.0" prefWidth="200.0" alignment="CENTER" styleClass="graficas">
         <VBox prefHeight="200.0" prefWidth="100.0">
             <Label text="Porcentaje proyectos activos" />
             <PieChart fx:id="pieChart" />
