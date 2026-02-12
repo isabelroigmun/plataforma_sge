@@ -142,7 +142,8 @@ public class DocumentosController implements Initializable {
             id.setText("ID: "+String.valueOf(proyecto.getCodigo()));
             nombre.setText("NOMBRE: "+proyecto.getNombre());
             fecha_creacion.setText("FECHA DE CREACIÓN: "+proyecto.getFechaCreacion().toLocalDate().toString());
-            fecha_ej_inicio.setText("FECHA DE INICIO: "+proyecto.getFechaEjInicio().toString());
+            fecha_ej_inicio.setText("FECHA EJECUCIÓN INICIO: "+proyecto.getFechaEjInicio().toString());
+            fecha_ej_final.setText("FECHA EJECUCIÓN FINAL: "+proyecto.getFechaEjInicio().toString());
             tipo_proyecto.setText("TIPO DE PROYECTO: "+proyecto.getTipo());
             activo.setText("¿ESTA ACTIVO?: "+proyecto.getEstado());
             calificacion.setText("CALIFICACIÓN: "+proyecto.getCalificacion());

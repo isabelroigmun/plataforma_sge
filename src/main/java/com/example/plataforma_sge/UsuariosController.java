@@ -62,7 +62,7 @@ public class UsuariosController implements Initializable {
         UsuarioOB sel= (UsuarioOB) tableUsuarios.getSelectionModel().getSelectedItem();
 
         if (sel==null){
-            mostrarAlerta("Selecciona un proyecto para poder borrarlo");
+            mostrarAlerta("Selecciona un usuario para poder borrarlo");
             return;
         }
 
@@ -82,7 +82,7 @@ public class UsuariosController implements Initializable {
     public void editar(){
         UsuarioOB seleccionado = (UsuarioOB) tableUsuarios.getSelectionModel().getSelectedItem();
         if (seleccionado==null){
-            mostrarAlerta("Selecciona un proyecto para poder editarlo");
+            mostrarAlerta("Selecciona un usuario para poder editarlo");
             return;
         }
         abrirFormulario(seleccionado);

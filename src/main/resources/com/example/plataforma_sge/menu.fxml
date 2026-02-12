@@ -2,7 +2,7 @@
 
 <?import javafx.scene.control.*?>
 
-<ToolBar fx:id="TolBar" prefHeight="40.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.MenuController">
+<ToolBar fx:id="TolBar" prefHeight="40.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.MenuController" stylesheets="@styles.css">
   <items>
     <Button mnemonicParsing="false" onAction="#change_inicio" text="Inicio" />
     <Button mnemonicParsing="false" onAction="#change_proyectos" text="Proyectos" />

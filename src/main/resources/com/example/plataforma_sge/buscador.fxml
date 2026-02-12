@@ -7,9 +7,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TableColumn?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.BuscadorController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.BuscadorController" stylesheets="@styles.css">
     <fx:include source="menu.fxml" />
-    <Label text="Buscador" />
+    <Label text="Buscador" styleClass="titulo"/>
   <Label text="Busca por palabras clave:" />
   <TextField fx:id="tfBuscador" />
   <Button mnemonicParsing="false" text="Buscar" onAction="#buscar"/>

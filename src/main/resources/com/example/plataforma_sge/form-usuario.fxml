@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.VBox?>
 
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.FormUsuariosController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/22" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.FormUsuariosController" stylesheets="@styles.css">
    <children>
-      <Label fx:id="txtPrincipal" text="Nuevo/editar usuario" />
-      <GridPane>
+      <Label fx:id="txtPrincipal" text="Nuevo/editar usuario" styleClass="titulo" />
+      <GridPane hgap="15" vgap="12">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -43,9 +43,9 @@
             <ComboBox prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" fx:id="cbEstado" />
          </children>
       </GridPane>
-      <HBox alignment="CENTER">
+      <HBox alignment="CENTER" styleClass="buttons-container">
          <children>
-            <Button mnemonicParsing="false" text="Cancelar" onAction="#cancelar" />
+            <Button mnemonicParsing="false" text="Cancelar" onAction="#cancelar" styleClass="cancel" />
             <Button mnemonicParsing="false" text="Guardar" onAction="#guardar" />
          </children>
       </HBox>

@@ -4,14 +4,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.HelloController">
+<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.plataforma_sge.HelloController" stylesheets="@styles.css">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
 
-    <Label text="Inicio de sesión" />
+    <Label text="Inicio de sesión"/>
     <TextField fx:id="user" promptText="Usuario" />
     <PasswordField fx:id="password" promptText="Contraseña"/>
-    <Label fx:id="estado" text="Estado" />
+    <Label fx:id="estado" text="Estado" styleClass="txtEstado" visible="false" />
     <Button onAction="#signin" text="Iniciar Sesión" />
 </VBox>
