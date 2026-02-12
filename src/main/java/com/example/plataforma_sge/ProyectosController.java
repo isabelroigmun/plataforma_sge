@@ -128,7 +128,7 @@ public class ProyectosController implements Initializable {
 //Se comprueba que el usuario tenga permisos para ejecutar la acción,
     //en este caso, editar proyectos, abriendo así un formulario para ello,
     //con la información de este ya aplicada a cada uno de los apartados del formulario.
-    //Por último, vuelve a ejecutar el método tabla para actualizarla.
+    //Por último, vuelve a e    jecutar el método tabla para actualizarla.
 
     public void editar(){
         SQL.comprobar_permisos("SELECT rol_id from usuarios where usuario= '"+SQL.usuario+"' ");

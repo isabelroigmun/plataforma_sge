@@ -17,9 +17,9 @@ public class ProyectoOB {
     private LocalDate fechaEjInicio;
     private LocalDate fechaEjFinal;
     private String tipo; //ENUM("IT","I+D","I+D+i","I+D+IT")
-    private String estado; //activo o inactivo
     private String calificacion; //ENUM("IT","I+D","I+D+i","I+D+IT")
-    private boolean bajadaCalificacion; //falso por defecto
+    private String estado; //activo o inactivo
+    private boolean bajadaCalificacion;
     private boolean enCooperacion;
     private int fases;
     private int jefeId;
